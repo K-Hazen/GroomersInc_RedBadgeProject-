@@ -16,10 +16,11 @@ namespace Groomers.Services
 
         public OwnerService(Guid userId)
         {
+            _context = new ApplicationDbContext();
             _userId = userId;
         }
 
-        //CREATE 
+        //CREATE    
 
         public bool CreateOwner(OwnerCreate model)
         {
@@ -80,7 +81,8 @@ namespace Groomers.Services
             var model = new OwnerFullInfo
             {
                 OwnerID = entity.OwnerID,
-                FullName = entity.FullName,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
                 StreetAddress = entity.StreetAddress,
                 City = entity.City,
                 State = entity.State,
@@ -89,7 +91,7 @@ namespace Groomers.Services
                 Email = entity.Email,
                 Pets = entity.Pets,
                 Appointments = entity.Appointments,
-            }
+            };
             return (model);
 
         }

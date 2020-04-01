@@ -11,7 +11,7 @@ namespace Groomers.Services
 {
     public class AppointmentService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context = new ApplicationDbContext();
 
         public bool CreateAppointment(AppointmentCreate model)
         {
