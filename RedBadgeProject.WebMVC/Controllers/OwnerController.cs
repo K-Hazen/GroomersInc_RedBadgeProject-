@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace RedBadgeProject.WebMVC.Controllers
 {
+    [Authorize]
     public class OwnerController : Controller
     {
         // GET: Owner
@@ -16,7 +17,7 @@ namespace RedBadgeProject.WebMVC.Controllers
         {
             var service = CreateOwnerService();
             var model = service.GetOwners();
-            return View();
+            return View(model);
         }
 
         public ActionResult Create()

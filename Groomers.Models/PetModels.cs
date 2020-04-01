@@ -37,32 +37,43 @@ namespace Groomers.Models
 
     }
 
-    public class PetContactInfo
+    public class PetFullDetail
     {
         public int PetID { get; set; }
 
-        [Display(Name = "Name")]
-        public string FullName { get; set; }
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
 
-        [Required]
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+   
         [Display(Name = "Address")]
         public string StreetAddress { get; set; }
 
 
-        [Required]
+
         [Display(Name = "City")]
         public string City { get; set; }
 
 
-        [Required]
+
         [Display(Name = "State")]
         [MaxLength(2, ErrorMessage = "Please use state abbreviation")]
         public string State { get; set; }
 
 
-        [Required]
+
         [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
+
+
+        public List<string> DogSize { get; set; }
+
+       
+       [DataType(DataType.MultilineText)]
+        public string SpecialRequest { get; set; }
 
 
         [DataType(DataType.Date)]
@@ -80,11 +91,10 @@ namespace Groomers.Models
 
         [Display(Name = "Name")]
         public string FullName { get; set; }
-
-        [Required]
+      
         public List<string> DogSize { get; set; }
 
-        [Required]
+
         [DefaultValue(false)]
         public bool IsHairLong { get; set; }
 

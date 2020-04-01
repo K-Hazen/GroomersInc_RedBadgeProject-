@@ -46,12 +46,12 @@ namespace Groomers.Data
 
 
         [ForeignKey(nameof(Owner))]
-        public int OwnerID { get; set; }
+        public int? OwnerID { get; set; }
         public virtual Owner Owner { get; set; }
 
        
         [ForeignKey(nameof(Pet))]
-        public int PetID { get; set; }
+        public int? PetID { get; set; }
         public virtual Owner Pet { get; set; }
 
 

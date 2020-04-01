@@ -55,7 +55,7 @@ namespace Groomers.Services
             }
         }
 
-        public PetContactInfo GetPetById(int petID)
+        public PetFullDetail GetPetById(int petID)
         {
             using (_context)
             {
@@ -65,14 +65,17 @@ namespace Groomers.Services
                     .Single(e => e.PetID == petID);
 
                 return
-                new PetContactInfo
-                {
+                new PetFullDetail
+                { 
                     PetID = entity.PetID,
-                    FullName = entity.FullName,
+                    FirstName = entity.FirstName,
+                    LastName = entity.LastName,
                     StreetAddress = entity.StreetAddress,
                     City = entity.City,
                     State = entity.State,
                     ZipCode = entity.ZipCode,
+                    DogSize = entity.DogSize,
+                    SpecialRequest = entity.SpecialRequest,
                     Birthday = entity.Birthday,
                     Appointments = entity.Appointments,
                     //Owner?? 
@@ -101,7 +104,7 @@ namespace Groomers.Services
             }
         }
 
-        public bool DeleteNote(int petID)
+        public bool DeletePet(int petID)
         {
             using (_context)
             {
