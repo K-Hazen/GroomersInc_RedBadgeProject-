@@ -30,7 +30,7 @@ namespace Groomers.Services
             //Trying to make multiple copies 
             for (int i = 0; i < model.NumberOfAppointmentsAvailable - 1; i++)
             {
-                var entityClones =
+                var entityClone =
                     new Appointment()
                     {
                         AppointmentDate = model.AppointmentDate,
@@ -39,7 +39,7 @@ namespace Groomers.Services
                         IsAvailable = model.IsAvailable,
                     };
 
-                _context.Appointments.Add(entityClones);
+                _context.Appointments.Add(entityClone);
                 //_context.SaveChanges(); may need this 
 
             }
@@ -50,7 +50,7 @@ namespace Groomers.Services
 
         //Get All 
 
-        public IEnumerable<AppointmentDetails> GetAppointments()
+        public IEnumerable<AppointmentListItem> GetAppointments()
         {
             using (_context)
             {
@@ -59,7 +59,7 @@ namespace Groomers.Services
                     .Appointments
                     .Select(
                         e =>
-                        new AppointmentDetails
+                        new AppointmentListItem
                         {
                             AppointmentID = e.AppointmentID,
                             AppointmentDate = e.AppointmentDate,
@@ -81,7 +81,8 @@ namespace Groomers.Services
             {
                 AppointmentID = entity.AppointmentID,
                 AppointmentDate = entity.AppointmentDate,
-                Duration = entity.Duration,
+                StartTime = entity.StartTime,
+                EndTime = entity.EndTime,
                 IsAvailable = entity.IsAvailable,
             };
 

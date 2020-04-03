@@ -42,7 +42,7 @@ namespace Groomers.Models
         public int? NumberOfAppointmentsAvailable { get; set; }
     }
 
-    public class AppointmentDetails
+    public class AppointmentListItem
     {
         public int AppointmentID { get; set; }
 
@@ -56,6 +56,40 @@ namespace Groomers.Models
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:HH:MM}")]
         public TimeSpan Duration { get; set; }
+
+
+        [DefaultValue(true)]
+        public bool IsAvailable { get; set; }
+
+
+        //[DataType(DataType.Currency)]
+        //[DisplayFormat(DataFormatString = "{0:C0}")]
+        //public decimal Price { get; set; }
+
+    }
+
+    public class AppointmentDetails
+    {
+        public int AppointmentID { get; set; }
+
+        [Display(Name = "Appointment Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime AppointmentDate { get; set; }
+
+
+        [Display(Name = "Appointment Start Time")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        public DateTimeOffset StartTime { get; set; }
+
+
+
+        [Display(Name = "Appointment End Time")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        public DateTimeOffset EndTime { get; set; }
+
 
 
         [DefaultValue(true)]

@@ -7,45 +7,21 @@ using System.Threading.Tasks;
 
 namespace Groomers.Data
 {
-    public abstract class Customer
+    public class Customer : Person
     {
-        [Key]
-        public int CustomerID { get; set; }
+        //Get -- Pet --> Get -- Appointment (allows access to get appointments for owner)
+        public virtual ICollection<Pet> Pets { get; set; }
 
-
-        [Required]
-        public string FirstName { get; set; }
-
-
-        [Required]
-        public string LastName { get; set; }
-
-
-        public string FullName => $"{FirstName } {LastName }";
-
-
-        [Required]
-        public string StreetAddress { get; set; }
-
-
-        [Required]
-        public string City { get; set; }
-
-
-        [Required]
-        public string State { get; set; }
-
-        
-        [Required]
-        public string ZipCode { get; set; }
+       
+        [DataType(DataType.Date)]
+        public DateTimeOffset ProfileCreationDate { get; set; }
 
 
         [DataType(DataType.Date)]
-        public DateTimeOffset CreatedUtc { get; set; }
+        public DateTimeOffset? ProfileModifiedDate { get; set; }
 
 
-        [DataType(DataType.Date)]
-        public DateTimeOffset? ModifiedUtc { get; set; }
+        // public virtual ICollection<Appointment> Appointments { get; set; }
 
     }
 }

@@ -18,12 +18,13 @@ namespace Groomers.Services
             var entity =
                 new Pet()
                 {
-                    FirstName = model.FirstName,
-                    DogSize = model.DogSize, //how would this be used? I was thinking drop down box
+                    Name = model.Name,
+                    SizeOfDog = model.SizeOfDog,
                     IsHairLong = model.IsHairLong,
                     SpecialRequest = model.SpecialRequest,
                     Birthday = model.Birthday,
-                    CreatedUtc = DateTimeOffset.Now,
+                    DateAdded = DateTimeOffset.Now,
+                    PersonID = model.PersonID, 
                 };
 
             _context.Pets.Add(entity);
@@ -31,54 +32,52 @@ namespace Groomers.Services
             return _context.SaveChanges() == 1;
         }
 
-        public IEnumerable<PetCharacteristics> GetPets()
+        public IEnumerable<PetListItem> GetPets()
         {
-            using (_context)
-            {
-                var query =
-                    _context
-                    .Pets
+            var entityList = _context.Pets.ToList();
+
+            var petList =
+                entityList
                     .Select(
                         e =>
-                        new PetCharacteristics
+                        new PetListItem
                         {
                             PetID = e.PetID,
-                            FullName = e.FullName,
-                            DogSize = e.DogSize,
+                            Name = e.Name,
+                            SizeOfDog = e.SizeOfDog,
                             IsHairLong = e.IsHairLong,
                             SpecialRequest = e.SpecialRequest,
-                            CreatedUtc = e.CreatedUtc,
-                            //Owner Connection?
-                        });
+                            DateAdded= e.DateAdded,
+                            PersonID = e.PersonID,
+                        }).ToList(); 
 
-                return query.ToList();
-            }
+            return (petList);
+            
         }
 
-        public PetFullDetail GetPetById(int petID)
+        public PetDetail GetPetById(int id)
         {
             using (_context)
             {
                 var entity =
                     _context
                     .Pets
-                    .Single(e => e.PetID == petID);
+                    .Single(e => e.PetID == id);
+
+                //List<AppointmentDetails> listOfAppointments = new List<AppointmentDetails>();
+                //foreach through entity's appointments and create a new AppointmentDetail for each one, then add to the list of AppointmentDetails
 
                 return
-                new PetFullDetail
-                { 
+                new PetDetail
+                {
                     PetID = entity.PetID,
-                    FirstName = entity.FirstName,
-                    LastName = entity.LastName,
-                    StreetAddress = entity.StreetAddress,
-                    City = entity.City,
-                    State = entity.State,
-                    ZipCode = entity.ZipCode,
-                    DogSize = entity.DogSize,
+                    Name = entity.Name,
+                    SizeOfDog = entity.SizeOfDog,
                     SpecialRequest = entity.SpecialRequest,
                     Birthday = entity.Birthday,
-                    Appointments = entity.Appointments,
-                    //Owner?? 
+                    PersonID = entity.PersonID,
+                    Appointments = entity.Appointments, //listOfAppointments 
+
                 };
             }
         }
@@ -92,26 +91,26 @@ namespace Groomers.Services
                     .Pets
                     .Single(e => e.PetID == model.PetID);
 
-                entity.FirstName = model.FirstName;
-                entity.LastName = model.LastName;
-                entity.DogSize = model.DogSize;
+                entity.PetID = model.PetID;
+                entity.Name = model.Name;
+                entity.SizeOfDog = model.SizeOfDog;
                 entity.Birthday = model.Birthday;
                 entity.SpecialRequest = model.SpecialRequest;
-                entity.ModifiedUtc = DateTimeOffset.Now;
+                entity.DateModified = DateTimeOffset.Now;
 
                 return _context.SaveChanges() == 1; 
 
             }
         }
 
-        public bool DeletePet(int petID)
+        public bool DeletePet(int id)
         {
             using (_context)
             {
                 var entity =
                     _context
                     .Pets
-                    .Single(e => e.PetID == petID);
+                    .Single(e => e.PetID == id);
                     _context.Pets.Remove(entity);
 
                 return _context.SaveChanges() == 1; 

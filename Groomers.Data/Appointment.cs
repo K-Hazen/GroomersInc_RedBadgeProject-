@@ -35,6 +35,8 @@ namespace Groomers.Data
         }
 
 
+
+        //Automated logic for to indicate whether block is available 
         [DefaultValue(true)]
         public bool IsAvailable { get; set; }
 
@@ -42,17 +44,19 @@ namespace Groomers.Data
         //[DataType(DataType.Currency)]
         //public decimal Price { get; set; }
 
+
+        //Get --> number of null PetID spots available 
         public int? NumberOfAppointmentsAvailable { get; set; }
 
 
-        [ForeignKey(nameof(Owner))]
-        public int? OwnerID { get; set; }
-        public virtual Owner Owner { get; set; }
+        //[ForeignKey(nameof(Owner))]
+        //public int? OwnerID { get; set; }
+        //public virtual Owner Owner { get; set; }
 
        
         [ForeignKey(nameof(Pet))]
         public int? PetID { get; set; }
-        public virtual Owner Pet { get; set; }
+        public virtual Customer Pet { get; set; }
 
 
 

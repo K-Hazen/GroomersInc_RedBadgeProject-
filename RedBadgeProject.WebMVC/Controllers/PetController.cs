@@ -1,5 +1,6 @@
 ﻿using Groomers.Models;
 using Groomers.Services;
+using Groonmers.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,9 @@ namespace RedBadgeProject.WebMVC.Controllers
     [Authorize]
     public class PetController : Controller
     {
-        // GET: Pet
+        private ApplicationDbContext _dB = new ApplicationDbContext(); 
+
+        // GET: Pet (View = ListItem)
         public ActionResult Index()
         {
             var service = CreatePetService();
@@ -44,7 +47,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
-        public ActionResult PetCharacteristics(int id)
+        public ActionResult Details(int id)
         {
             var service = CreatePetService();
             var model = service.GetPetById(id);
@@ -61,11 +64,10 @@ namespace RedBadgeProject.WebMVC.Controllers
                 new PetEdit
                 {
                     PetID = detail.PetID,
-                    FirstName = detail.FirstName,
-                    LastName = detail.LastName,
-                    DogSize = detail.DogSize,
-                    SpecialRequest = detail.SpecialRequest,
+                    Name = detail.Name,
+                    SizeOfDog = detail.SizeOfDog,
                     Birthday = detail.Birthday,
+                    SpecialRequest = detail.SpecialRequest,
                 };
 
             return View(model);
