@@ -1,5 +1,6 @@
 ﻿using Groomers.Models;
 using Groomers.Services;
+using Groonmers.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace RedBadgeProject.WebMVC.Controllers
     [Authorize]
     public class AppointmentController : Controller
     {
+        private ApplicationDbContext _dB = new ApplicationDbContext(); 
         // GET: Appointment
         public ActionResult Index()
         {
@@ -67,7 +69,7 @@ namespace RedBadgeProject.WebMVC.Controllers
                     IsAvailable = detail.IsAvailable,
                 };
 
-                return View(model); 
+            return View(model); 
         }
 
         [HttpPost]

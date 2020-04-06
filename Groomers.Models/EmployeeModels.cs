@@ -20,7 +20,7 @@ namespace Groomers.Models
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "Employee ID Number")]
+        [Display(Name = "Employee Number")]
         public int EmployeeID { get; set; }
 
         [Display(Name = "Job Title")]
@@ -56,8 +56,9 @@ namespace Groomers.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-
-        //datetime - hire date
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTimeOffset HireDate { get; set; }
 
     }
 
@@ -65,7 +66,8 @@ namespace Groomers.Models
     {
         public int PersonID { get; set; }
 
-
+        [Display(Name = "First Name")]
+        [DisplayFormat(ApplyFormatInEditMode = true)]
         public int EmployeeID { get; set; }
 
 
@@ -104,6 +106,11 @@ namespace Groomers.Models
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTimeOffset HireDate { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name = "Termination Date")]
+        public DateTimeOffset? TerminationDate { get; set; }
+
         public ICollection<Pet> Pets { get; set; }
 
     }
@@ -112,6 +119,7 @@ namespace Groomers.Models
     {
         public int PersonID { get; set; }
 
+        [Display(Name = "Employee Number")]
         public int EmployeeID { get; set; }
 
         [Display(Name = "Full Name")]
@@ -138,6 +146,7 @@ namespace Groomers.Models
     {
         public int PersonID { get; set; }
 
+        [Display(Name = "Employee Number")]
         public int EmployeeID { get; set; }
 
         [Display(Name = "First Name")]
@@ -166,6 +175,11 @@ namespace Groomers.Models
 
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Termination Date")]
+        public DateTimeOffset? TerminationDate { get; set; }
 
     }
 }

@@ -67,6 +67,15 @@ namespace Groomers.Services
                 //List<AppointmentDetails> listOfAppointments = new List<AppointmentDetails>();
                 //foreach through entity's appointments and create a new AppointmentDetail for each one, then add to the list of AppointmentDetails
 
+               // List<AppointmentListItem> listofApps = new List<AppointmentListItem>();
+
+                //foreach (var app in entity.Appointments)
+                //{
+                //    model.Appointments  
+                //    AppointmentDate = app.AppointmentDate,
+
+                //}
+
                 return
                 new PetDetail
                 {
@@ -76,7 +85,14 @@ namespace Groomers.Services
                     SpecialRequest = entity.SpecialRequest,
                     Birthday = entity.Birthday,
                     PersonID = entity.PersonID,
-                    Appointments = entity.Appointments, //listOfAppointments 
+                    DateAdded = entity.DateAdded,
+                    DateModified = entity.DateModified,
+                    Appointments = entity.Appointments.Select(app => new AppointmentDetails
+                    {
+                        AppointmentDate = app.AppointmentDate,
+                        StartTime = app.StartTime,
+                        
+                    })
 
                 };
             }

@@ -20,13 +20,16 @@ namespace Groomers.Models
         public string LastName { get; set; }
 
         [Required]
+        [Display(Name = "Size")]
         public DogSize SizeOfDog { get; set; }
 
         [Required]
+        [Display(Name = "Long Hair?")]
         public bool IsHairLong { get; set; }
 
 
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Grooming Requests")]
         public string SpecialRequest { get; set; }
 
 
@@ -46,10 +49,12 @@ namespace Groomers.Models
 
 
         [Required]
+        [Display(Name = "Size")]
         public DogSize SizeOfDog { get; set; }
 
 
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Grooming Requests")]
         public string SpecialRequest { get; set; }
 
 
@@ -58,16 +63,20 @@ namespace Groomers.Models
         public DateTime Birthday { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "Date Added")]
         public DateTimeOffset DateAdded { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "Date Modified")]
         public DateTimeOffset? DateModified { get; set; }
 
         public int PersonID { get; set; }
 
 
         //Ask Casey about this vs. a regular List 
-        public ICollection<Appointment> Appointments { get; set; }
+       //public ICollection<Appointment> Appointments { get; set; }
+
+       public IEnumerable<AppointmentDetails> Appointments { get; set; }
         //Owner 
 
     }
@@ -79,14 +88,17 @@ namespace Groomers.Models
         [Display(Name = "Name")]
         public string Name { get; set; }
 
+        [Display(Name = "Size")]
         public DogSize SizeOfDog { get; set; }
 
 
         [DefaultValue(false)]
+        [Display(Name = "Long Hair?")]
         public bool IsHairLong { get; set; }
 
 
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Requests")]
         public string SpecialRequest { get; set; }
 
         [DataType(DataType.Date)]
@@ -105,6 +117,7 @@ namespace Groomers.Models
 
         public string Name { get; set; }
 
+        [Display(Name = "Size")]
         public DogSize SizeOfDog { get; set; }
 
 

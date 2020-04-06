@@ -43,7 +43,6 @@ namespace Groomers.Services
                 //_context.SaveChanges(); may need this 
 
             }
-            //Not sure if this will work it may just write over _context line multiple time verses making multiple copies 
 
             return _context.SaveChanges() == model.NumberOfAppointmentsAvailable;
         }
@@ -52,22 +51,21 @@ namespace Groomers.Services
 
         public IEnumerable<AppointmentListItem> GetAppointments()
         {
-            using (_context)
-            {
-                var query =
-                    _context
-                    .Appointments
-                    .Select(
-                        e =>
-                        new AppointmentListItem
-                        {
-                            AppointmentID = e.AppointmentID,
-                            AppointmentDate = e.AppointmentDate,
-                            Duration = e.Duration,
-                            IsAvailable = e.IsAvailable,
-                        });
-                return query.ToList(); 
-            }
+            var entityList = _context.Appointments.ToList();
+            
+            var appointmentList =
+                entityList
+                .Select(
+                    e =>
+                    new AppointmentListItem
+                    {
+                        AppointmentID = e.AppointmentID,
+                        AppointmentDate = e.AppointmentDate,
+                        StartTime = e.StartTime,
+                        IsAvailable = e.IsAvailable,
+                    }).ToList();
+
+            return (appointmentList);
         }
 
         public AppointmentDetails GetAppointmentById(int appointmentID)

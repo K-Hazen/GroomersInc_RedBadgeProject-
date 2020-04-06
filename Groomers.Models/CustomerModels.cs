@@ -86,7 +86,8 @@ namespace Groomers.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        public ICollection<Pet> Pets { get; set; }
+
+        public List<PetListItem> Pets { get; set; }
 
        // public ICollection<Appointment> Appointments { get; set; }
 
@@ -109,17 +110,17 @@ namespace Groomers.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Display(Name = "Profile Created On:")]
+        [Display(Name = "Profile Created On")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTimeOffset ProfileCreationDate { get; set; }
 
-        [Display(Name = "Profile Modified On:")]
+        [Display(Name = "Profile Modified On")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTimeOffset? ProfileModifiedDate { get; set; }
 
-        public ICollection<Pet> Pets { get; set; }
+        public List<PetListItem> Pets { get; set; }
 
         //public ICollection<Appointment> Appointments { get; set; }
     }

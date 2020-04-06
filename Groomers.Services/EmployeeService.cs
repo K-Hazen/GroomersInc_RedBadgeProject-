@@ -54,10 +54,12 @@ namespace Groomers.Services
                     new EmployeeListItem
                     {
                         PersonID = e.PersonID,
+                        EmployeeID = e.EmployeeID,
                         FullName = e.FullName,
                         PhoneNumber = e.PhoneNumber,
                         Email = e.Email,
                         HireDate = e.HireDate,
+                        Pets = e.Pets, 
                     }).ToList();
 
             return (petList);
@@ -83,6 +85,7 @@ namespace Groomers.Services
                 Email = entity.Email,
                 Pets = entity.Pets,
                 HireDate = entity.HireDate,
+                TerminationDate = entity.TerminationDate,
                 //appointments?
             };
 
@@ -114,6 +117,7 @@ namespace Groomers.Services
             }
 
         }
+
         public bool DeleteEmployee(int id)
         {
             using (_context)

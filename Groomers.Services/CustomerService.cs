@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Groomers.Services
 {
-    public class OwnerService
+    public class CustomerService
     {
         private readonly Guid _userID;
         private readonly ApplicationDbContext _context;
 
-        public OwnerService(Guid userID)
+        public CustomerService(Guid userID)
         {
             _context = new ApplicationDbContext();
             _userID = userID;
@@ -62,21 +62,32 @@ namespace Groomers.Services
                             Email = e.Email,
                             ProfileCreationDate = e.ProfileCreationDate,
                             ProfileModifiedDate = e.ProfileModifiedDate,
-                            Pets = e.Pets,
+                            Pets = e.Pets.Select(pet => new PetListItem
+                            {
+                                Name = $"{pet.Name}, ",
+                            }).ToList()
                         }).ToList();
-
-            //why is list in Park Rater vs. Array in Eleven Note?
 
             return (customerList); 
         }
 
-        public CustomerDetail GetOwnerById(int id)
+        public CustomerDetail GetCustomerById(int id)
         {
             var entity = _context.Customers.Find(id);
 
 
             if (entity == null)
                 return null;
+
+            List<PetListItem> petList = new List<PetListItem>();
+
+            foreach (var pet in entity.Pets)
+            {
+                petList.Add(new PetListItem
+                {
+                    Name = $"{pet.Name}, "
+                });
+            }
 
             var model = new CustomerDetail
             {
@@ -89,8 +100,7 @@ namespace Groomers.Services
                 ZipCode = entity.ZipCode,
                 PhoneNumber = entity.PhoneNumber,
                 Email = entity.Email,
-                Pets = entity.Pets,
-                //Appointments = entity.Appointments,?
+                Pets = petList,
             };
             return (model);
 
