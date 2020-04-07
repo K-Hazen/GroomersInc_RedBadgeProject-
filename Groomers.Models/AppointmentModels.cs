@@ -140,12 +140,12 @@ namespace Groomers.Models
 
     public class AppointmentSelect
     {
-        //public int AppointmentID { get; set; }
+        public int AppointmentID { get; set; }
 
         [Display(Name = "Appointment Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTime AppointmentDate { get; set; }
+        public DateTimeOffset AppointmentDate { get; set; }
 
 
         [Display(Name = "Appointment Start Time")]
@@ -155,6 +155,38 @@ namespace Groomers.Models
 
         [DefaultValue(true)]
         public bool IsAvailable { get; set; }
+
+    }
+
+    public class AppointmentBook
+    {
+        public int AppointmentID { get; set; }
+
+        [Display(Name = "Appointment Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime AppointmentDate { get; set; }
+
+
+        [Display(Name = "Appointment Start Time")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm}")]
+        public DateTimeOffset StartTime { get; set; }
+
+
+
+        [Display(Name = "Appointment End Time")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm}")]
+        public DateTimeOffset EndTime { get; set; }
+
+
+        [DefaultValue(true)]
+        public bool IsAvailable { get; set; }
+        
+        public int PetID { get; set; }
+
+
 
     }
 }

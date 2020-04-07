@@ -12,6 +12,12 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.AppointmentID)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.PersonID)
+        </th>*@
+        <th>
             @Html.DisplayNameFor(model => model.AppointmentDate)
         </th>
         <th>
@@ -24,22 +30,26 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AppointmentDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsAvailable)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.AppointmentID)
+    </td>
+    @*<td>
+        @Html.DisplayFor(modelItem => item.PersonID)
+    </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.AppointmentDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.StartTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsAvailable)
+    </td>
+    <td>
+        @Html.ActionLink("Book", "BookAppointment", new { id = item.AppointmentID })
+    </td>
+</tr>
 }
 
 </table>

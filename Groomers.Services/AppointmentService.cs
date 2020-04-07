@@ -100,7 +100,7 @@ namespace Groomers.Services
                     e => 
                       new AppointmentSelect
                      {
-                         //DateSelect = DateTime.Today,
+                         AppointmentID = e.AppointmentID,
                          AppointmentDate = e.AppointmentDate,
                          StartTime = e.StartTime,
                          IsAvailable = e.IsAvailable,
@@ -126,6 +126,31 @@ namespace Groomers.Services
                 return _context.SaveChanges() == 1;
             }
         }
+
+        //Add logic to update appointment availability to false 
+
+        public bool BookAppointment(AppointmentBook model)
+        {
+            using (_context)
+            {
+                var entity =
+                    _context
+                    .Appointments
+                    .Single(e => e.AppointmentID == model.AppointmentID);
+
+                entity.AppointmentID = model.AppointmentID; 
+                entity.AppointmentDate = entity.AppointmentDate; 
+                entity.StartTime = entity.StartTime; 
+                entity.PetID = model.PetID;
+                entity.IsAvailable = false;
+
+                return _context.SaveChanges() == 1; 
+            }
+
+        }
+
+
+
 
         public bool DeleteAppointment(int appointmentID)
         {

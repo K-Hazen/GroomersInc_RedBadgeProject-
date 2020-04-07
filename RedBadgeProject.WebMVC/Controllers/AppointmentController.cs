@@ -81,6 +81,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
 
@@ -105,6 +106,55 @@ namespace RedBadgeProject.WebMVC.Controllers
             ModelState.AddModelError("", "Your appointment could not be updated.");
             return View(model);
         }
+
+        [ActionName("BookAppointment")]
+        public ActionResult BookAppointment(int id)
+        {
+            var service = CreateAppointmentService();
+            var detail = service.GetAppointmentById(id);
+            var model =
+                new AppointmentBook
+                {
+                    AppointmentID = detail.AppointmentID,
+                    AppointmentDate = detail.AppointmentDate,
+                    StartTime = detail.StartTime,
+                    IsAvailable = detail.IsAvailable,
+                   
+                };
+
+            ViewBag.CategoryID = new SelectList(_dB.Pets, "PetID", "Name");
+            return View(model);
+
+        }
+        
+        [ActionName("BookAppointment")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BookAppointment(int id, AppointmentBook model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.AppointmentID != id)
+            {
+                ModelState.AddModelError("", "Date is not valid.");
+                return View(model);
+            }
+
+            var service = CreateAppointmentService();
+
+            if (service.BookAppointment(model))
+            {
+                TempData["SaveResult"] = "Your appointment has been booked.";
+                return RedirectToAction("Index", "Customer");
+
+                //return RedirectToAction("Details", "Customer", new { id = model.PersonID });
+            }
+
+            ModelState.AddModelError("", "Your selection is already booked. Please pick another option.");
+            return View(model);
+        }
+
+
 
         [ActionName("Delete")]
 
