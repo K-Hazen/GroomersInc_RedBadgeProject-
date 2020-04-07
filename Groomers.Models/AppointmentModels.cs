@@ -20,14 +20,14 @@ namespace Groomers.Models
         [Required]
         [Display(Name = "Appointment Start Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset StartTime { get; set; }
 
 
         [Required]
         [Display(Name = "Appointment End Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset EndTime { get; set; }
 
 
@@ -53,7 +53,7 @@ namespace Groomers.Models
 
         [Display(Name = "Appointment Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset StartTime { get; set; }
 
         [Display(Name = "Duration")]
@@ -84,14 +84,14 @@ namespace Groomers.Models
 
         [Display(Name = "Appointment Start Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset StartTime { get; set; }
 
 
 
         [Display(Name = "Appointment End Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset EndTime { get; set; }
 
 
@@ -118,14 +118,14 @@ namespace Groomers.Models
 
         [Display(Name = "Appointment Start Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset StartTime { get; set; }
 
 
 
         [Display(Name = "Appointment End Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH:mm}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset EndTime { get; set; }
 
 
@@ -138,4 +138,23 @@ namespace Groomers.Models
         //public decimal Price { get; set; }
     }
 
+    public class AppointmentSelect
+    {
+        //public int AppointmentID { get; set; }
+
+        [Display(Name = "Appointment Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime AppointmentDate { get; set; }
+
+
+        [Display(Name = "Appointment Start Time")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh:mm}")]
+        public DateTimeOffset StartTime { get; set; }
+
+        [DefaultValue(true)]
+        public bool IsAvailable { get; set; }
+
+    }
 }

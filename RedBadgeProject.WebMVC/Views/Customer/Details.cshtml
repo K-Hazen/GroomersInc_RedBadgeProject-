@@ -88,12 +88,14 @@
         <dd>
             @foreach (var p in Model.Pets)
             {
-                @p.Name
+            @p.Name
             }
         </dd>
-
     </dl>
 </div>
+
+@Html.Partial("SearchDate", new Groomers.Models.SearchDatePV() )
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PersonID }) |
     @Html.ActionLink("Back to List", "Index")

@@ -12,7 +12,7 @@ namespace RedBadgeProject.WebMVC.Controllers
     [Authorize]
     public class AppointmentController : Controller
     {
-        private ApplicationDbContext _dB = new ApplicationDbContext(); 
+        private ApplicationDbContext _dB = new ApplicationDbContext();
         // GET: Appointment
         public ActionResult Index()
         {
@@ -21,14 +21,23 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ActionName ("SelectAppointmentDate")]
+        public ActionResult SelectAppointmentDate(DateTimeOffset? SearchDate)
+        {
+            var service = CreateAppointmentService();
+            var model = service.GetAppointmentByDate(SearchDate); 
+            return View(model);
+        }
+
         public ActionResult Create()
         {
-            return View(); 
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
+
         public ActionResult Create(AppointmentCreate model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -44,7 +53,7 @@ namespace RedBadgeProject.WebMVC.Controllers
 
             ModelState.AddModelError("", "Appointment could not be created");
 
-            return View(model); 
+            return View(model);
         }
 
         public ActionResult Details(int id)
@@ -52,7 +61,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             var service = CreateAppointmentService();
             var model = service.GetAppointmentById(id);
 
-            return View(model); 
+            return View(model);
         }
 
         public ActionResult Edit(int id)
@@ -69,12 +78,12 @@ namespace RedBadgeProject.WebMVC.Controllers
                     IsAvailable = detail.IsAvailable,
                 };
 
-            return View(model); 
+            return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-         
+
         public ActionResult Edit(int id, AppointmentEdit model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -82,10 +91,10 @@ namespace RedBadgeProject.WebMVC.Controllers
             if (model.AppointmentID != id)
             {
                 ModelState.AddModelError("", "Id MisMatch");
-                return View(model); 
+                return View(model);
             }
 
-            var service = CreateAppointmentService(); 
+            var service = CreateAppointmentService();
 
             if (service.UpdateAppointment(model))
             {
@@ -94,11 +103,11 @@ namespace RedBadgeProject.WebMVC.Controllers
             }
 
             ModelState.AddModelError("", "Your appointment could not be updated.");
-            return View(model); 
+            return View(model);
         }
 
         [ActionName("Delete")]
-        
+
         public ActionResult Delete(int id)
         {
             var service = CreateAppointmentService();
@@ -110,7 +119,7 @@ namespace RedBadgeProject.WebMVC.Controllers
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        
+
         public ActionResult DeletePost(int id)
         {
             var service = CreateAppointmentService();
@@ -119,7 +128,7 @@ namespace RedBadgeProject.WebMVC.Controllers
 
             TempData["SaveResult"] = "Your appointment was deleted";
 
-            return RedirectToAction("Index"); 
+            return RedirectToAction("Index");
         }
 
         //helper

@@ -52,7 +52,7 @@ namespace Groomers.Services
         public IEnumerable<AppointmentListItem> GetAppointments()
         {
             var entityList = _context.Appointments.ToList();
-            
+
             var appointmentList =
                 entityList
                 .Select(
@@ -62,6 +62,7 @@ namespace Groomers.Services
                         AppointmentID = e.AppointmentID,
                         AppointmentDate = e.AppointmentDate,
                         StartTime = e.StartTime,
+                        Duration = e.Duration,
                         IsAvailable = e.IsAvailable,
                     }).ToList();
 
@@ -72,8 +73,8 @@ namespace Groomers.Services
         {
             var entity = _context.Appointments.Find(appointmentID);
 
-            if (entity == null) 
-            return null;
+            if (entity == null)
+                return null;
 
             var model = new AppointmentDetails
             {
@@ -85,6 +86,27 @@ namespace Groomers.Services
             };
 
             return (model);
+        }
+
+        public IEnumerable<AppointmentSelect> GetAppointmentByDate(DateTimeOffset? selectedDate)
+        {
+
+            var entityList = _context.Appointments.ToList();
+
+            var appList =
+                entityList
+                .Where(e => e.AppointmentDate == selectedDate)
+                .Select(
+                    e => 
+                      new AppointmentSelect
+                     {
+                         //DateSelect = DateTime.Today,
+                         AppointmentDate = e.AppointmentDate,
+                         StartTime = e.StartTime,
+                         IsAvailable = e.IsAvailable,
+                     }).ToList(); 
+
+            return (appList);
         }
 
         public bool UpdateAppointment(AppointmentEdit model)
@@ -101,7 +123,7 @@ namespace Groomers.Services
                 entity.EndTime = model.EndTime;
                 entity.IsAvailable = model.IsAvailable;
 
-                return _context.SaveChanges() == 1; 
+                return _context.SaveChanges() == 1;
             }
         }
 
@@ -114,7 +136,7 @@ namespace Groomers.Services
 
             _context.Appointments.Remove(entity);
 
-            return _context.SaveChanges() == 1; 
+            return _context.SaveChanges() == 1;
         }
 
 

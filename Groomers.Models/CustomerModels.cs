@@ -86,6 +86,11 @@ namespace Groomers.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        //[Display(Name = "Select Date")]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
+        //public DateTimeOffset? SearchDate { get; set; }
+
 
         public List<PetListItem> Pets { get; set; }
 
