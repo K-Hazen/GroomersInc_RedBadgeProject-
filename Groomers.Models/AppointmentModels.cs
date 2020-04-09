@@ -135,6 +135,8 @@ namespace Groomers.Models
 
 
         [DefaultValue(true)]
+        [Display(Name = "Available")]
+
         public bool IsAvailable { get; set; }
 
         public int? PersonID { get; set; }
@@ -161,6 +163,7 @@ namespace Groomers.Models
         public DateTimeOffset StartTime { get; set; }
 
         [DefaultValue(true)]
+        [Display(Name = "Available")]
         public bool IsAvailable { get; set; }
 
     }
@@ -189,6 +192,7 @@ namespace Groomers.Models
 
 
         [DefaultValue(true)]
+        [Display(Name = "Available")]
         public bool IsAvailable { get; set; }
 
         [Display(Name = "Select Pet")]

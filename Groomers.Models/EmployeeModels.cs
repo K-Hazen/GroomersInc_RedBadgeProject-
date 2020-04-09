@@ -51,7 +51,7 @@ namespace Groomers.Models
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
-        public string PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
@@ -96,7 +96,7 @@ namespace Groomers.Models
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
-        public string PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
 
         [DataType(DataType.EmailAddress)]
@@ -128,7 +128,7 @@ namespace Groomers.Models
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
-        public string PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
 
         [DataType(DataType.EmailAddress)]
@@ -170,7 +170,7 @@ namespace Groomers.Models
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
-        public string PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
 
         [DataType(DataType.EmailAddress)]

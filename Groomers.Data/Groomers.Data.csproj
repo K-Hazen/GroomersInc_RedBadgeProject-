@@ -66,6 +66,10 @@
     <Compile Include="Migrations\202004090202104_new.designer.cs">
       <DependentUpon>202004090202104_new.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004091453534_phoneNumberStringtoLong.cs" />
+    <Compile Include="Migrations\202004091453534_phoneNumberStringtoLong.designer.cs">
+      <DependentUpon>202004091453534_phoneNumberStringtoLong.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="IdentityModels.cs" />
@@ -86,6 +90,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202004090202104_new.resx">
       <DependentUpon>202004090202104_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004091453534_phoneNumberStringtoLong.resx">
+      <DependentUpon>202004091453534_phoneNumberStringtoLong.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

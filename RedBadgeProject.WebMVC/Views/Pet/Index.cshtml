@@ -41,9 +41,9 @@
         <th>
             @Html.DisplayNameFor(model => model.DateAdded)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.PersonID)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -68,9 +68,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateAdded)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.PersonID)
-            </td>
+            </td>*@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.PetID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.PetID }) |

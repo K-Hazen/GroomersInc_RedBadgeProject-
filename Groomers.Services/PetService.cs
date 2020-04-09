@@ -11,15 +11,25 @@ namespace Groomers.Services
 {
     public class PetService
     {
-        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+        private readonly ApplicationDbContext _context;
+        private readonly Guid _userID;
+
+        public PetService() { }
+
+        public PetService(Guid userID)
+        {
+            _context = new ApplicationDbContext();
+            _userID = userID; 
+        }
+
 
 
         public bool CreatePet(PetCreate model)
         {
-         
-            //var customerService = CreateCustomerService(); ;
-            //var customerDetail = customerService.GetCustomerByCurrentUserId();
-            
+
+            var customerService = new CustomerService(_userID);
+            var customerDetail = customerService.GetCustomerByCurrentUserId();
+
             var entity =
                 new Pet()
                 {
@@ -29,7 +39,7 @@ namespace Groomers.Services
                     SpecialRequest = model.SpecialRequest,
                     Birthday = model.Birthday,
                     DateAdded = DateTimeOffset.Now,
-                    PersonID = model.PersonID, 
+                    PersonID = customerDetail.PersonID,
                 };
 
             _context.Pets.Add(entity);
@@ -58,6 +68,32 @@ namespace Groomers.Services
 
             return (petList);
             
+        }
+
+        public IEnumerable<PetListItem> GetPetsByUserID()
+        {
+
+            //_context.Pets where e.Person.UserID
+            var entityList = _context.Pets.ToList();
+
+            var petList =
+                entityList
+                    .Where(e => e.Person.UserID == _userID)
+                    .Select(
+                        e =>
+                        new PetListItem
+                        {
+                            PetID = e.PetID,
+                            Name = e.Name,
+                            SizeOfDog = e.SizeOfDog,
+                            IsHairLong = e.IsHairLong,
+                            SpecialRequest = e.SpecialRequest,
+                            DateAdded = e.DateAdded,
+                            PersonID = e.PersonID,
+                        }).ToList();
+
+            return (petList);
+
         }
 
         public PetDetail GetPetById(int id)
@@ -125,12 +161,7 @@ namespace Groomers.Services
             }
         }
 
-        //private CustomerService CreateCustomerService()
-        //{
-        //    var userId = Guid.Parse(User.Identity.GetUserId());
-        //    var service = new CustomerService(userId);
-        //    return service;
-        //}
+        
     }
 
 }

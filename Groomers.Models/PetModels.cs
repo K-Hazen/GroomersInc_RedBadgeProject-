@@ -59,7 +59,7 @@ namespace Groomers.Models
         public DateTime Birthday { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Date Added")]
+        [Display(Name = "Pet Added On")]
         public DateTimeOffset DateAdded { get; set; }
 
         [DataType(DataType.Date)]
@@ -71,12 +71,7 @@ namespace Groomers.Models
         [Display(Name = "Owner")]
         public string FullName { get; set; }
 
-
-        //Ask Casey about this vs. a regular List 
-       //public ICollection<Appointment> Appointments { get; set; }
-
        public IEnumerable<AppointmentDetails> Appointments { get; set; }
-        //Owner 
 
     }
 
@@ -92,7 +87,7 @@ namespace Groomers.Models
 
 
         [DefaultValue(false)]
-        [Display(Name = "Long Hair?")]
+        [Display(Name = "Long Hair")]
         public bool IsHairLong { get; set; }
 
 
@@ -101,12 +96,10 @@ namespace Groomers.Models
         public string SpecialRequest { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "Pet Added On")]
         public DateTimeOffset DateAdded { get; set; }
 
         public int PersonID { get; set; }
-
-
-
     }
 
     public class PetEdit
@@ -119,15 +112,19 @@ namespace Groomers.Models
         [Display(Name = "Size")]
         public DogSize SizeOfDog { get; set; }
 
+        [DefaultValue(false)]
+        [Display(Name = "Long Hair")]
+        public bool IsHairLong { get; set; }
+
 
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Grooming Requests")]
         public string SpecialRequest { get; set; }
 
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime Birthday { get; set; }
-
 
     }
 }

@@ -45,7 +45,7 @@ namespace Groomers.Data
 
         [Required]
         [DataType(DataType.PhoneNumber)]
-        public string PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
 
         [DataType(DataType.EmailAddress)]
