@@ -12,12 +12,20 @@ namespace Groomers.Services
     public class AppointmentService
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
+       
+        //private readonly Guid _userID; 
+
+        //public AppointmentService(Guid userID)
+        //{
+        //    _userID = userID; 
+        //}
 
         public bool CreateAppointment(AppointmentCreate model)
         {
             var entity =
                 new Appointment()
                 {
+                    
                     AppointmentDate = model.AppointmentDate,
                     StartTime = model.StartTime,
                     EndTime = model.EndTime,
@@ -90,7 +98,7 @@ namespace Groomers.Services
 
         public IEnumerable<AppointmentSelect> GetAppointmentByDate(DateTimeOffset? selectedDate)
         {
-
+           // var personID = _context.Customers.Where(e. => e.UserID == )
             var entityList = _context.Appointments.ToList();
 
             var appList =
@@ -101,6 +109,7 @@ namespace Groomers.Services
                       new AppointmentSelect
                      {
                          AppointmentID = e.AppointmentID,
+                         //PersonID = personalID,
                          AppointmentDate = e.AppointmentDate,
                          StartTime = e.StartTime,
                          IsAvailable = e.IsAvailable,
@@ -122,6 +131,7 @@ namespace Groomers.Services
                 entity.StartTime = model.StartTime;
                 entity.EndTime = model.EndTime;
                 entity.IsAvailable = model.IsAvailable;
+                entity.PersonID = model.PersonID;
 
                 return _context.SaveChanges() == 1;
             }
@@ -143,6 +153,7 @@ namespace Groomers.Services
                 entity.StartTime = entity.StartTime; 
                 entity.PetID = model.PetID;
                 entity.IsAvailable = false;
+                entity.PersonID = model.PersonID; 
 
                 return _context.SaveChanges() == 1; 
             }

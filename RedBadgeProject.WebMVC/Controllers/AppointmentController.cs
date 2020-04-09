@@ -1,6 +1,7 @@
 ﻿using Groomers.Models;
 using Groomers.Services;
 using Groonmers.Data;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace RedBadgeProject.WebMVC.Controllers
     public class AppointmentController : Controller
     {
         private ApplicationDbContext _dB = new ApplicationDbContext();
+      
+        
         // GET: Appointment
         public ActionResult Index()
         {
@@ -22,11 +25,12 @@ namespace RedBadgeProject.WebMVC.Controllers
         }
 
         [HttpPost]
-        [ActionName ("SelectAppointmentDate")]
+        [ActionName("SelectAppointmentDate")]
         public ActionResult SelectAppointmentDate(DateTimeOffset? SearchDate)
         {
+            //ViewBag.PersonID = PersonID;
             var service = CreateAppointmentService();
-            var model = service.GetAppointmentByDate(SearchDate); 
+            var model = service.GetAppointmentByDate(SearchDate);
             return View(model);
         }
 
@@ -106,27 +110,36 @@ namespace RedBadgeProject.WebMVC.Controllers
             ModelState.AddModelError("", "Your appointment could not be updated.");
             return View(model);
         }
-
+       
+        
+        //the method for the customer, whereas we would create a less strict method for the admin to manually input the Person ID
         [ActionName("BookAppointment")]
-        public ActionResult BookAppointment(int id)
+        public ActionResult BookAppointment(int id/*, Guid userID*/)
         {
+            // customer service
+            var customerService = CreateCustomerService(); ;
+
+            // get currentUser'sCustomer
+            var customerDetail = customerService.GetCustomerByCurrentUserId();
+
+
             var service = CreateAppointmentService();
             var detail = service.GetAppointmentById(id);
-            var model =
+            var model = 
                 new AppointmentBook
                 {
                     AppointmentID = detail.AppointmentID,
                     AppointmentDate = detail.AppointmentDate,
                     StartTime = detail.StartTime,
                     IsAvailable = detail.IsAvailable,
-                   
+                    PersonID = customerDetail.PersonID// call current user's ID
                 };
 
-            ViewBag.CategoryID = new SelectList(_dB.Pets, "PetID", "Name");
+            ViewBag.PetID = new SelectList(customerDetail.Pets, "PetID", "Name");
             return View(model);
 
         }
-        
+
         [ActionName("BookAppointment")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -145,9 +158,9 @@ namespace RedBadgeProject.WebMVC.Controllers
             if (service.BookAppointment(model))
             {
                 TempData["SaveResult"] = "Your appointment has been booked.";
-                return RedirectToAction("Index", "Customer");
+                //return RedirectToAction("Index", "Customer");
 
-                //return RedirectToAction("Details", "Customer", new { id = model.PersonID });
+               return RedirectToAction("Details", "Customer", new { id = model.PersonID });
             }
 
             ModelState.AddModelError("", "Your selection is already booked. Please pick another option.");
@@ -186,6 +199,12 @@ namespace RedBadgeProject.WebMVC.Controllers
         private AppointmentService CreateAppointmentService()
         {
             var service = new AppointmentService();
+            return service;
+        }
+        private CustomerService CreateCustomerService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new CustomerService(userId);
             return service;
         }
     }

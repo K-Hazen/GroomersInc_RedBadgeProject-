@@ -68,8 +68,45 @@ namespace Groomers.Services
                             }).ToList()
                         }).ToList();
 
-            return (customerList); 
+            return (customerList);
         }
+        // create a new method for Get CustomerByCurrentUserId
+
+        public CustomerDetail GetCustomerByCurrentUserId()
+        {
+            var entity = _context.Customers.Single(e => e.userID == _userID);
+
+            if (entity == null) return null;
+
+
+            List<PetListItem> petList = new List<PetListItem>();
+
+            foreach (var pet in entity.Pets)
+            {
+                petList.Add(new PetListItem
+                {
+                    PetID = pet.PetID,
+                    Name = pet.Name
+                });
+            }
+
+            var model = new CustomerDetail
+            {
+                PersonID = entity.PersonID,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                StreetAddress = entity.StreetAddress,
+                City = entity.City,
+                State = entity.State,
+                ZipCode = entity.ZipCode,
+                PhoneNumber = entity.PhoneNumber,
+                Email = entity.Email,
+                Pets = petList,
+            };
+
+            return (model);
+        }
+
 
         public CustomerDetail GetCustomerById(int id)
         {
@@ -89,6 +126,18 @@ namespace Groomers.Services
                 });
             }
 
+            List<AppointmentListItem> appList = new List<AppointmentListItem>();
+            foreach (var app in entity.Appointments)
+            {
+                appList.Add(new AppointmentListItem
+                {
+                    AppointmentDate = app.AppointmentDate,
+                    StartTime = app.StartTime,
+                    PetID = app.PetID,
+                   // PetName = entity.Pets.Where(e => e.PetID == app.PetID).Select(e => new PetListItem { Name = e.Name }).ToString()
+                }); 
+            }
+
             var model = new CustomerDetail
             {
                 PersonID = entity.PersonID,
@@ -101,6 +150,7 @@ namespace Groomers.Services
                 PhoneNumber = entity.PhoneNumber,
                 Email = entity.Email,
                 Pets = petList,
+                Appointments = appList,
             };
             return (model);
 
@@ -113,9 +163,9 @@ namespace Groomers.Services
                 var entity =
                       _context
                       .Customers
-                     .Single(e => e.PersonID == model.PersonID && e.userID == _userID);
+                      .Single(e => e.PersonID == model.PersonID && e.userID == _userID);
 
-                entity.PersonID = model.PersonID; 
+                entity.PersonID = model.PersonID;
                 entity.FirstName = model.FirstName;
                 entity.LastName = model.LastName;
                 entity.StreetAddress = model.StreetAddress;
@@ -126,7 +176,7 @@ namespace Groomers.Services
                 entity.Email = model.Email;
                 entity.ProfileModifiedDate = DateTimeOffset.Now;
 
-                return _context.SaveChanges() == 1; 
+                return _context.SaveChanges() == 1;
             }
         }
 
@@ -140,7 +190,7 @@ namespace Groomers.Services
                     .Single(e => e.PersonID == id && e.userID == _userID);
                 _context.Customers.Remove(entity);
 
-                return _context.SaveChanges() == 1; 
+                return _context.SaveChanges() == 1;
             }
         }
 

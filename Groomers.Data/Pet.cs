@@ -33,6 +33,9 @@ namespace Groomers.Data
         public int PetID { get; set; }
 
         [Required]
+
+
+        [Required]
         public string Name { get; set; }
 
         [Required]

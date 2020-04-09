@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    //int personID = Model.PersonID;
 }
 
 <h2>Details</h2>
@@ -88,13 +89,37 @@
         <dd>
             @foreach (var p in Model.Pets)
             {
-            @p.Name
+                @p.Name
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Appointments)
+        </dt>
+        <dd>
+            @foreach (var p in Model.Appointments)
+            {
+                <ul>
+
+                    <li>
+                        @Html.DisplayNameFor(model => p.AppointmentDate)
+                        @Html.DisplayFor(model => p.AppointmentDate, new { htmlAttributes = new { @class = "form-control" } })
+                    </li>
+                    <li>
+                        @Html.DisplayNameFor(model => p.StartTime)
+                        @Html.DisplayFor(model => p.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                    </li>
+                    <li>
+                        @Html.DisplayNameFor(model => p.PetName)
+                        
+                        @Html.DisplayFor(model => p.PetName, new { htmlAttributes = new { @class = "form-control" } })
+                    </li>
+                </ul>
             }
         </dd>
     </dl>
 </div>
 
-@Html.Partial("SearchDate", new Groomers.Models.SearchDatePV() )
+@Html.Partial("SearchDate", new Groomers.Models.SearchDatePV() @*{ PersonID = personID }*@)
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PersonID }) |

@@ -9,7 +9,7 @@ namespace Groomers.Models
 {
     public class SearchDatePV
     {
-        public int PersonID { get; set; }
+        public int? PersonID { get; set; }
 
         [Display(Name = "Select Date")]
         [DataType(DataType.Date)]

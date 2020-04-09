@@ -32,11 +32,8 @@ namespace RedBadgeProject.WebMVC.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            //if (model.SearchDate != targetDate)
-            //{
-            //    ModelState.AddModelError("", "Date doesn't match");
-            //    return View(model);
-            //}
+           // var something = new CustomerListItem()
+  
 
             var service = new AppointmentService(); 
 

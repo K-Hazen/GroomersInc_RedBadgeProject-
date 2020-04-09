@@ -16,8 +16,7 @@ namespace Groomers.Models
         public string Name { get; set; }
 
         [Required]
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
+        public Guid userID { get; set; }
 
         [Required]
         [Display(Name = "Size")]

@@ -53,7 +53,7 @@ namespace Groomers.Models
 
         [Display(Name = "Appointment Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm tt}")]
         public DateTimeOffset StartTime { get; set; }
 
         [Display(Name = "Duration")]
@@ -61,9 +61,12 @@ namespace Groomers.Models
        //[DisplayFormat(DataFormatString = "{0:HH:MM}")]
         public TimeSpan Duration { get; set; }
 
-
         [DefaultValue(true)]
         public bool IsAvailable { get; set; }
+
+        public int? PetID { get; set; }
+
+        public string PetName { get; set; }
 
 
         //[DataType(DataType.Currency)]
@@ -84,7 +87,7 @@ namespace Groomers.Models
 
         [Display(Name = "Appointment Start Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm tt}")]
         public DateTimeOffset StartTime { get; set; }
 
 
@@ -95,9 +98,10 @@ namespace Groomers.Models
         public DateTimeOffset EndTime { get; set; }
 
 
-
         [DefaultValue(true)]
         public bool IsAvailable { get; set; }
+
+        public int? PersonID { get; set; }
 
 
         //[DataType(DataType.Currency)]
@@ -132,6 +136,8 @@ namespace Groomers.Models
         [DefaultValue(true)]
         public bool IsAvailable { get; set; }
 
+        public int? PersonID { get; set; }
+
 
         //[DataType(DataType.Currency)]
         //[DisplayFormat(DataFormatString = "{0:C0}")]
@@ -150,11 +156,13 @@ namespace Groomers.Models
 
         [Display(Name = "Appointment Start Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:hh:mm}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm tt}")]
         public DateTimeOffset StartTime { get; set; }
 
         [DefaultValue(true)]
         public bool IsAvailable { get; set; }
+
+        public int? PersonID { get; set; }
 
     }
 
@@ -183,10 +191,10 @@ namespace Groomers.Models
 
         [DefaultValue(true)]
         public bool IsAvailable { get; set; }
-        
+
+        [Display(Name = "Select Pet")]
         public int PetID { get; set; }
 
-
-
+        public int? PersonID { get; set; }
     }
 }

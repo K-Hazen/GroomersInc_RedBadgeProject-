@@ -63,19 +63,7 @@ namespace Groomers.Services
                     _context
                     .Pets
                     .Single(e => e.PetID == id);
-
-                //List<AppointmentDetails> listOfAppointments = new List<AppointmentDetails>();
-                //foreach through entity's appointments and create a new AppointmentDetail for each one, then add to the list of AppointmentDetails
-
-               // List<AppointmentListItem> listofApps = new List<AppointmentListItem>();
-
-                //foreach (var app in entity.Appointments)
-                //{
-                //    model.Appointments  
-                //    AppointmentDate = app.AppointmentDate,
-
-                //}
-
+                
                 return
                 new PetDetail
                 {

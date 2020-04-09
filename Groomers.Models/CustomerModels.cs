@@ -94,8 +94,7 @@ namespace Groomers.Models
 
         public List<PetListItem> Pets { get; set; }
 
-       // public ICollection<Appointment> Appointments { get; set; }
-
+        public List<AppointmentListItem> Appointments { get; set; }
     }
 
   
@@ -126,8 +125,6 @@ namespace Groomers.Models
         public DateTimeOffset? ProfileModifiedDate { get; set; }
 
         public List<PetListItem> Pets { get; set; }
-
-        //public ICollection<Appointment> Appointments { get; set; }
     }
 
     public class CustomerEdit

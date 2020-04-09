@@ -33,7 +33,7 @@
         <dd>
             @Html.DisplayFor(model => model.SizeOfDog)
         </dd>
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.SpecialRequest)
         </dt>
@@ -73,9 +73,28 @@
         <dd>
             @Html.DisplayFor(model => model.PersonID)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Appointments)
+        </dt>
+        <dd>
+            @foreach (var p in Model.Appointments)
+            {
+                <ul>
 
+                    <li>
+                        @Html.DisplayNameFor(model => p.AppointmentDate)
+                        @Html.DisplayFor(model => p.AppointmentDate, new { htmlAttributes = new { @class = "form-control" } })
+                    </li>
+                    <li>
+                        @Html.DisplayNameFor(model => p.StartTime)
+                        @Html.DisplayFor(model => p.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                    </li>
+                </ul>
+            }
+        </dd>
     </dl>
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PetID }) |
     @Html.ActionLink("Back to List", "Index")

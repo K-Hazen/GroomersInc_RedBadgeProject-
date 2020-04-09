@@ -1,5 +1,6 @@
 ﻿using Groomers.Models;
 using Groomers.Services;
+using Groonmers.Data;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,10 @@ namespace RedBadgeProject.WebMVC.Controllers
     [Authorize]
     public class CustomerController : Controller
     {
+        private ApplicationDbContext _dB = new ApplicationDbContext();
+
+
+
         // GET: Customer
         public ActionResult Index()
         {
@@ -51,9 +56,11 @@ namespace RedBadgeProject.WebMVC.Controllers
             var service = CreateCustomerService();
             var model = service.GetCustomerById(id);
 
+            //ViewBag.PetID = new SelectList(model.Pets, "PetID", "Name");
             return View(model);
         }
 
+      
         public ActionResult Edit(int id)
         {
             var service = CreateCustomerService();
@@ -75,6 +82,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model); 
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
 
