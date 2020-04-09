@@ -6,19 +6,21 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Groomers.Data.Pet;
 
 namespace Groomers.Models
 {
     public class PetCreate
     {
         [Required]
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
-
+        public string Name { get; set; }
 
         [Required]
-        public List<string> DogSize { get; set; }
-        
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        public DogSize SizeOfDog { get; set; }
 
         [Required]
         public bool IsHairLong { get; set; }
@@ -32,59 +34,54 @@ namespace Groomers.Models
         [DisplayFormat(DataFormatString = "{0:MM/yyyy}")]
         public DateTime Birthday { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTimeOffset CreatedUtc { get; set; }
+        public int PersonID { get; set; }
 
     }
 
-    public class PetContactInfo
+    public class PetDetail
     {
         public int PetID { get; set; }
 
-        [Display(Name = "Name")]
-        public string FullName { get; set; }
-
-        [Required]
-        [Display(Name = "Address")]
-        public string StreetAddress { get; set; }
+        public string Name { get; set; }
 
 
         [Required]
-        [Display(Name = "City")]
-        public string City { get; set; }
+        public DogSize SizeOfDog { get; set; }
 
 
-        [Required]
-        [Display(Name = "State")]
-        [MaxLength(2, ErrorMessage = "Please use state abbreviation")]
-        public string State { get; set; }
-
-
-        [Required]
-        [Display(Name = "Zip Code")]
-        public string ZipCode { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string SpecialRequest { get; set; }
 
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/yyyy}")]
         public DateTime Birthday { get; set; }
 
+        [DataType(DataType.Date)]
+        public DateTimeOffset DateAdded { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTimeOffset? DateModified { get; set; }
+
+        public int PersonID { get; set; }
+
+
+        //Ask Casey about this vs. a regular List 
         public ICollection<Appointment> Appointments { get; set; }
         //Owner 
 
     }
 
-    public class PetCharacteristics
+    public class PetListItem
     {
         public int PetID { get; set; }
 
         [Display(Name = "Name")]
-        public string FullName { get; set; }
+        public string Name { get; set; }
 
-        [Required]
-        public List<string> DogSize { get; set; }
+        public DogSize SizeOfDog { get; set; }
 
-        [Required]
+
         [DefaultValue(false)]
         public bool IsHairLong { get; set; }
 
@@ -93,26 +90,22 @@ namespace Groomers.Models
         public string SpecialRequest { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTimeOffset CreatedUtc { get; set; }
+        public DateTimeOffset DateAdded { get; set; }
 
-        //Owner Connection
-        //list of appointments 
+        public int PersonID { get; set; }
+
+
+
     }
 
     public class PetEdit
     {
+
         public int PetID { get; set; }
-        
 
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
+        public string Name { get; set; }
 
-
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
-
-
-        public List<string> DogSize { get; set; }
+        public DogSize SizeOfDog { get; set; }
 
 
         [DataType(DataType.MultilineText)]
@@ -123,9 +116,6 @@ namespace Groomers.Models
         [DisplayFormat(DataFormatString = "{0:MM/yyyy}")]
         public DateTime Birthday { get; set; }
 
-
-        [DataType(DataType.Date)]
-        public DateTimeOffset? ModifiedUtc { get; set; }
 
     }
 }

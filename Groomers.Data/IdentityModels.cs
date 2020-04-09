@@ -33,10 +33,11 @@ namespace Groonmers.Data
             return new ApplicationDbContext();
         }
 
+        public DbSet<Person> People { get; set; }
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Owner> Owners { get; set; }
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

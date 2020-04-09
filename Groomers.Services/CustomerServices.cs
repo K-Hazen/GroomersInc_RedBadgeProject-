@@ -11,22 +11,23 @@ namespace Groomers.Services
 {
     public class OwnerService
     {
-        private readonly Guid _userId;
+        private readonly Guid _userID;
         private readonly ApplicationDbContext _context;
 
-        public OwnerService(Guid userId)
+        public OwnerService(Guid userID)
         {
-            _userId = userId;
+            _context = new ApplicationDbContext();
+            _userID = userID;
         }
 
-        //CREATE 
+        //CREATE    
 
-        public bool CreateOwner(OwnerCreate model)
+        public bool CreateCustomer(CustomerCreate model)
         {
             var entity =
-                new Owner()
+                new Customer()
                 {
-                    HumanID = _userId, 
+                    userID = _userID,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     StreetAddress = model.StreetAddress,
@@ -35,52 +36,53 @@ namespace Groomers.Services
                     ZipCode = model.ZipCode,
                     PhoneNumber = model.PhoneNumber,
                     Email = model.Email,
-                    CreatedUtc = DateTimeOffset.Now,
+                    ProfileCreationDate = DateTimeOffset.Now,
                 };
 
-            _context.Owners.Add(entity);
+            _context.Customers.Add(entity);
             return _context.SaveChanges() == 1;
         }
 
         //GET -- Contact Info
 
-        public IEnumerable<OwnerEssentials> GetOwners()
+        public IEnumerable<CustomerListItem> GetCustomers()
         {
-            var entityList = _context.Owners.ToList();
+            var entityList = _context.Customers.ToList();
 
-            var ownerList =
+            var customerList =
                 entityList
-                 .Where(e => e.HumanID == _userId)
+                 .Where(e => e.userID == _userID)
                  .Select(
                     e =>
-                        new OwnerEssentials
+                        new CustomerListItem
                         {
-                            OwnerID = e.OwnerID,
+                            PersonID = e.PersonID,
                             FullName = e.FullName,
                             PhoneNumber = e.PhoneNumber,
                             Email = e.Email,
-                            CreatedUtc = e.CreatedUtc,
-                            ModifiedUtc = e.ModifiedUtc,
+                            ProfileCreationDate = e.ProfileCreationDate,
+                            ProfileModifiedDate = e.ProfileModifiedDate,
                             Pets = e.Pets,
                         }).ToList();
 
             //why is list in Park Rater vs. Array in Eleven Note?
 
-            return (ownerList); 
+            return (customerList); 
         }
 
-        public OwnerFullInfo GetOwnerById(int ownerID)
+        public CustomerDetail GetOwnerById(int id)
         {
-            var entity = _context.Owners.Find(ownerID);
+            var entity = _context.Customers.Find(id);
 
 
             if (entity == null)
                 return null;
 
-            var model = new OwnerFullInfo
+            var model = new CustomerDetail
             {
-                OwnerID = entity.OwnerID,
-                FullName = entity.FullName,
+                PersonID = entity.PersonID,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
                 StreetAddress = entity.StreetAddress,
                 City = entity.City,
                 State = entity.State,
@@ -88,21 +90,22 @@ namespace Groomers.Services
                 PhoneNumber = entity.PhoneNumber,
                 Email = entity.Email,
                 Pets = entity.Pets,
-                Appointments = entity.Appointments,
-            }
+                //Appointments = entity.Appointments,?
+            };
             return (model);
 
         }
 
-        public bool UpdateOwner(OwnerEdit model)
+        public bool UpdateCustomer(CustomerEdit model)
         {
             using (_context)
             {
                 var entity =
                       _context
-                      .Owners
-                     .Single(e => e.OwnerID == model.OwnerID && e.HumanID == _userId);
+                      .Customers
+                     .Single(e => e.PersonID == model.PersonID && e.userID == _userID);
 
+                entity.PersonID = model.PersonID; 
                 entity.FirstName = model.FirstName;
                 entity.LastName = model.LastName;
                 entity.StreetAddress = model.StreetAddress;
@@ -111,21 +114,21 @@ namespace Groomers.Services
                 entity.ZipCode = model.ZipCode;
                 entity.PhoneNumber = model.PhoneNumber;
                 entity.Email = model.Email;
-                entity.ModifiedUtc = DateTimeOffset.Now;
+                entity.ProfileModifiedDate = DateTimeOffset.Now;
 
                 return _context.SaveChanges() == 1; 
             }
         }
 
-        public bool DeleteOwner(int ownerID)
+        public bool DeleteCustomer(int id)
         {
             using (_context)
             {
                 var entity =
                     _context
-                    .Owners
-                    .Single(e => e.OwnerID == ownerID && e.HumanID == _userId);
-                _context.Owners.Remove(entity);
+                    .Customers
+                    .Single(e => e.PersonID == id && e.userID == _userID);
+                _context.Customers.Remove(entity);
 
                 return _context.SaveChanges() == 1; 
             }

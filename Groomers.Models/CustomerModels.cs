@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Groomers.Data;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -7,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace Groomers.Models
 {
-    public class CustomerCreate
+    public class CustomerCreate 
     {
+
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
@@ -39,21 +42,30 @@ namespace Groomers.Models
         [DataType(DataType.PostalCode)]
         public string ZipCode { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTimeOffset CreatedUtc { get; set; }
+        [Required]
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
+        public string PhoneNumber { get; set; }
 
 
-        [DataType(DataType.Date)]
-        public DateTimeOffset? ModifiedUtc { get; set; }
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        //date create.now 
+
     }
 
-    public class CustomerContactInfo
+    public class CustomerDetail
     {
-        [Key]
-        public int CustomerID { get; set; }
+        public int PersonID { get; set; }
 
-        [Display(Name = "Name")]
-        public string FullName { get; set; }
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
 
         [Display(Name = "Address")]
         public string StreetAddress { get; set; }
@@ -67,21 +79,25 @@ namespace Groomers.Models
 
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
-        [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
+        [DisplayFormat(DataFormatString = "{0:(###) ###-####}", ApplyFormatInEditMode = true)]
         public string PhoneNumber { get; set; }
 
 
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        public ICollection<Pet> Pets { get; set; }
+
+       // public ICollection<Appointment> Appointments { get; set; }
+
     }
 
-    public class CusotmerEssentials
+  
+    public class CustomerListItem
     {
-        [Key]
-        public int CustomerID { get; set; }
+        public int PersonID { get; set; }
 
-        [Display(Name = "Full Name")]
+        [Display(Name = "Name")]
         public string FullName { get; set; }
 
         [Display(Name = "Phone Number")]
@@ -93,17 +109,24 @@ namespace Groomers.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Display(Name = "Profile Created On:")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTimeOffset CreateUtc { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTimeOffset ProfileCreationDate { get; set; }
 
+        [Display(Name = "Profile Modified On:")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTimeOffset? ModifiedUTC { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTimeOffset? ProfileModifiedDate { get; set; }
+
+        public ICollection<Pet> Pets { get; set; }
+
+        //public ICollection<Appointment> Appointments { get; set; }
     }
 
-    public class CustomersEdit
+    public class CustomerEdit
     {
+        public int PersonID { get; set; }
 
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
@@ -128,6 +151,18 @@ namespace Groomers.Models
         [Display(Name = "Zip Code")]
         [DataType(DataType.PostalCode)]
         public string ZipCode { get; set; }
+
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
+        public string PhoneNumber { get; set; }
+
+
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        //public bool IsRemoved { get; set; }
+        //list of pets? So if they need to remove one from their profile
     }
 
 }
