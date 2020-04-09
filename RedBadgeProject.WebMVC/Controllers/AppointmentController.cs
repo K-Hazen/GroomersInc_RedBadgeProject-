@@ -113,13 +113,15 @@ namespace RedBadgeProject.WebMVC.Controllers
        
         
         //the method for the customer, whereas we would create a less strict method for the admin to manually input the Person ID
+       
+        
         [ActionName("BookAppointment")]
         public ActionResult BookAppointment(int id/*, Guid userID*/)
         {
             // customer service
             var customerService = CreateCustomerService(); ;
 
-            // get currentUser'sCustomer
+            // get currentUser's Customer
             var customerDetail = customerService.GetCustomerByCurrentUserId();
 
 
@@ -158,7 +160,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             if (service.BookAppointment(model))
             {
                 TempData["SaveResult"] = "Your appointment has been booked.";
-                //return RedirectToAction("Index", "Customer");
+               // return RedirectToAction("Index", "Customer");
 
                return RedirectToAction("Details", "Customer", new { id = model.PersonID });
             }

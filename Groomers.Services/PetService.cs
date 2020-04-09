@@ -13,8 +13,13 @@ namespace Groomers.Services
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
 
+
         public bool CreatePet(PetCreate model)
         {
+         
+            //var customerService = CreateCustomerService(); ;
+            //var customerDetail = customerService.GetCustomerByCurrentUserId();
+            
             var entity =
                 new Pet()
                 {
@@ -72,16 +77,15 @@ namespace Groomers.Services
                     SizeOfDog = entity.SizeOfDog,
                     SpecialRequest = entity.SpecialRequest,
                     Birthday = entity.Birthday,
-                    PersonID = entity.PersonID,
+                   // PersonID = entity.PersonID,
+                    FullName = entity.Person.FullName, 
                     DateAdded = entity.DateAdded,
                     DateModified = entity.DateModified,
                     Appointments = entity.Appointments.Select(app => new AppointmentDetails
                     {
                         AppointmentDate = app.AppointmentDate,
                         StartTime = app.StartTime,
-                        
                     })
-
                 };
             }
         }
@@ -121,5 +125,12 @@ namespace Groomers.Services
             }
         }
 
+        //private CustomerService CreateCustomerService()
+        //{
+        //    var userId = Guid.Parse(User.Identity.GetUserId());
+        //    var service = new CustomerService(userId);
+        //    return service;
+        //}
     }
+
 }

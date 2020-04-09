@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Groomers.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -161,8 +162,6 @@ namespace Groomers.Models
 
         [DefaultValue(true)]
         public bool IsAvailable { get; set; }
-
-        public int? PersonID { get; set; }
 
     }
 

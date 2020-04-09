@@ -25,7 +25,7 @@ namespace Groomers.Services
             var entity =
                 new Employee()
                 {
-                    userID = _userID,
+                    UserID = _userID,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     EmployeeID = model.EmployeeID,
@@ -48,7 +48,7 @@ namespace Groomers.Services
 
             var petList =
                 entityList
-                .Where(e => e.userID == _userID)
+                .Where(e => e.UserID == _userID)
                 .Select(
                     e =>
                     new EmployeeListItem
@@ -99,7 +99,7 @@ namespace Groomers.Services
                 var entity =
                     _context
                     .Employees
-                    .Single(e => e.PersonID == model.PersonID && e.userID == _userID);
+                    .Single(e => e.PersonID == model.PersonID && e.UserID == _userID);
 
                 entity.PersonID = model.PersonID;
                 entity.EmployeeID = model.EmployeeID;
@@ -125,7 +125,7 @@ namespace Groomers.Services
                 var entity = 
                     _context
                     .Employees
-                    .Single(e => e.PersonID == id && e.userID == _userID);
+                    .Single(e => e.PersonID == id && e.UserID == _userID);
                 _context.Employees.Remove(entity);
 
                 return _context.SaveChanges() == 1;

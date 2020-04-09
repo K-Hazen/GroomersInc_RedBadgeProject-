@@ -10,7 +10,6 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Groonmers.Data.ApplicationDbContext";
         }
 
         protected override void Seed(Groonmers.Data.ApplicationDbContext context)

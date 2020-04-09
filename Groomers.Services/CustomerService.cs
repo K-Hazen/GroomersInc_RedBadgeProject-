@@ -27,7 +27,7 @@ namespace Groomers.Services
             var entity =
                 new Customer()
                 {
-                    userID = _userID,
+                    UserID = _userID,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     StreetAddress = model.StreetAddress,
@@ -51,7 +51,7 @@ namespace Groomers.Services
 
             var customerList =
                 entityList
-                 .Where(e => e.userID == _userID)
+                 .Where(e => e.UserID == _userID)
                  .Select(
                     e =>
                         new CustomerListItem
@@ -74,7 +74,7 @@ namespace Groomers.Services
 
         public CustomerDetail GetCustomerByCurrentUserId()
         {
-            var entity = _context.Customers.Single(e => e.userID == _userID);
+            var entity = _context.Customers.Single(e => e.UserID == _userID);
 
             if (entity == null) return null;
 
@@ -163,7 +163,7 @@ namespace Groomers.Services
                 var entity =
                       _context
                       .Customers
-                      .Single(e => e.PersonID == model.PersonID && e.userID == _userID);
+                      .Single(e => e.PersonID == model.PersonID && e.UserID == _userID);
 
                 entity.PersonID = model.PersonID;
                 entity.FirstName = model.FirstName;
@@ -187,7 +187,7 @@ namespace Groomers.Services
                 var entity =
                     _context
                     .Customers
-                    .Single(e => e.PersonID == id && e.userID == _userID);
+                    .Single(e => e.PersonID == id && e.UserID == _userID);
                 _context.Customers.Remove(entity);
 
                 return _context.SaveChanges() == 1;

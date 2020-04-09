@@ -32,8 +32,6 @@ namespace Groomers.Data
         [Key]
         public int PetID { get; set; }
 
-        [Required]
-
 
         [Required]
         public string Name { get; set; }
@@ -66,7 +64,7 @@ namespace Groomers.Data
         public int PersonID { get; set; }
         public virtual Person Person { get; set; }
 
-        
+
         public virtual ICollection<Appointment> Appointments { get; set; }
 
 

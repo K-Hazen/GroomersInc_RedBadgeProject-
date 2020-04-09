@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class _new : DbMigration
     {
         public override void Up()
         {
@@ -18,18 +18,20 @@
                         IsAvailable = c.Boolean(nullable: false),
                         NumberOfAppointmentsAvailable = c.Int(),
                         PetID = c.Int(),
+                        PersonID = c.Int(),
                     })
                 .PrimaryKey(t => t.AppointmentID)
+                .ForeignKey("dbo.Person", t => t.PersonID)
                 .ForeignKey("dbo.Pet", t => t.PetID)
-                .ForeignKey("dbo.Person", t => t.PetID)
-                .Index(t => t.PetID);
+                .Index(t => t.PetID)
+                .Index(t => t.PersonID);
             
             CreateTable(
                 "dbo.Person",
                 c => new
                     {
                         PersonID = c.Int(nullable: false, identity: true),
-                        userID = c.Guid(nullable: false),
+                        UserID = c.Guid(nullable: false),
                         FirstName = c.String(nullable: false),
                         LastName = c.String(nullable: false),
                         StreetAddress = c.String(nullable: false),
@@ -144,14 +146,15 @@
             DropForeignKey("dbo.IdentityUserLogin", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
-            DropForeignKey("dbo.Appointment", "PetID", "dbo.Person");
-            DropForeignKey("dbo.Pet", "PersonID", "dbo.Person");
             DropForeignKey("dbo.Appointment", "PetID", "dbo.Pet");
+            DropForeignKey("dbo.Pet", "PersonID", "dbo.Person");
+            DropForeignKey("dbo.Appointment", "PersonID", "dbo.Person");
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
             DropIndex("dbo.Pet", new[] { "PersonID" });
+            DropIndex("dbo.Appointment", new[] { "PersonID" });
             DropIndex("dbo.Appointment", new[] { "PetID" });
             DropTable("dbo.IdentityUserLogin");
             DropTable("dbo.IdentityUserClaim");

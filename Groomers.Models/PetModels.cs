@@ -16,9 +16,6 @@ namespace Groomers.Models
         public string Name { get; set; }
 
         [Required]
-        public Guid userID { get; set; }
-
-        [Required]
         [Display(Name = "Size")]
         public DogSize SizeOfDog { get; set; }
 
@@ -70,6 +67,9 @@ namespace Groomers.Models
         public DateTimeOffset? DateModified { get; set; }
 
         public int PersonID { get; set; }
+
+        [Display(Name = "Owner")]
+        public string FullName { get; set; }
 
 
         //Ask Casey about this vs. a regular List 

@@ -10,11 +10,11 @@ namespace Groomers.Data
     public abstract class Person
     {
         [Key]
+        [Required]
         public int PersonID { get; set; }
 
         [Required]
-        public Guid userID { get; set; }
-
+        public Guid UserID { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -38,16 +38,16 @@ namespace Groomers.Data
         [Required]
         public string State { get; set; }
 
-        
+
         [Required]
         public string ZipCode { get; set; }
 
-        
+
         [Required]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
-        
+
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 

@@ -113,9 +113,11 @@ namespace Groomers.Services
                          AppointmentDate = e.AppointmentDate,
                          StartTime = e.StartTime,
                          IsAvailable = e.IsAvailable,
-                     }).ToList(); 
+                     }).ToList();
+            
+           var finalList = appList.OrderBy(x => x.StartTime).ToList(); 
 
-            return (appList);
+            return (finalList);
         }
 
         public bool UpdateAppointment(AppointmentEdit model)
@@ -159,7 +161,6 @@ namespace Groomers.Services
             }
 
         }
-
 
 
 

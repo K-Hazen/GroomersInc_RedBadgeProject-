@@ -7,13 +7,13 @@ namespace Groomers.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class personFKtoappointments : IMigrationMetadata
+    public sealed partial class _new : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(personFKtoappointments));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_new));
         
         string IMigrationMetadata.Id
         {
-            get { return "202004072104166_person FK to appointments"; }
+            get { return "202004090202104_new"; }
         }
         
         string IMigrationMetadata.Source

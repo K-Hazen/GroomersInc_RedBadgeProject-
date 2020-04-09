@@ -62,17 +62,9 @@
   <ItemGroup>
     <Compile Include="Appointment.cs" />
     <Compile Include="Employee.cs" />
-    <Compile Include="Migrations\202004031514287_InitialCreate.cs" />
-    <Compile Include="Migrations\202004031514287_InitialCreate.designer.cs">
-      <DependentUpon>202004031514287_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004072104166_person FK to appointments.cs" />
-    <Compile Include="Migrations\202004072104166_person FK to appointments.designer.cs">
-      <DependentUpon>202004072104166_person FK to appointments.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004082102074_addedVirtualAppList.cs" />
-    <Compile Include="Migrations\202004082102074_addedVirtualAppList.designer.cs">
-      <DependentUpon>202004082102074_addedVirtualAppList.cs</DependentUpon>
+    <Compile Include="Migrations\202004090202104_new.cs" />
+    <Compile Include="Migrations\202004090202104_new.designer.cs">
+      <DependentUpon>202004090202104_new.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Person.cs" />
@@ -91,16 +83,9 @@
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202004031514287_InitialCreate.resx">
-      <DependentUpon>202004031514287_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004072104166_person FK to appointments.resx">
-      <DependentUpon>202004072104166_person FK to appointments.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004082102074_addedVirtualAppList.resx">
-      <DependentUpon>202004082102074_addedVirtualAppList.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004090202104_new.resx">
+      <DependentUpon>202004090202104_new.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
