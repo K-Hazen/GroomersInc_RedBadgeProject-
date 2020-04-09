@@ -46,7 +46,7 @@ namespace Groomers.Models
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
-        public string PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
 
         [DataType(DataType.EmailAddress)]
@@ -80,16 +80,21 @@ namespace Groomers.Models
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         [DisplayFormat(DataFormatString = "{0:(###) ###-####}", ApplyFormatInEditMode = true)]
-        public string PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
 
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        public ICollection<Pet> Pets { get; set; }
+        //[Display(Name = "Select Date")]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
+        //public DateTimeOffset? SearchDate { get; set; }
 
-       // public ICollection<Appointment> Appointments { get; set; }
 
+        public List<PetListItem> Pets { get; set; }
+
+        public List<AppointmentListItem> Appointments { get; set; }
     }
 
   
@@ -103,25 +108,23 @@ namespace Groomers.Models
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
-        public string PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
 
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Display(Name = "Profile Created On:")]
+        [Display(Name = "Profile Created On")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTimeOffset ProfileCreationDate { get; set; }
 
-        [Display(Name = "Profile Modified On:")]
+        [Display(Name = "Profile Modified On")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTimeOffset? ProfileModifiedDate { get; set; }
 
-        public ICollection<Pet> Pets { get; set; }
-
-        //public ICollection<Appointment> Appointments { get; set; }
+        public List<PetListItem> Pets { get; set; }
     }
 
     public class CustomerEdit
@@ -155,7 +158,7 @@ namespace Groomers.Models
         [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
-        public string PhoneNumber { get; set; }
+        public long PhoneNumber { get; set; }
 
 
         [DataType(DataType.EmailAddress)]

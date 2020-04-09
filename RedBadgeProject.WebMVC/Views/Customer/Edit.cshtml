@@ -1,4 +1,4 @@
-﻿@model Groomers.Models.OwnerEdit
+﻿@model Groomers.Models.CustomerEdit
 
 @{
     ViewBag.Title = "Edit";
@@ -12,10 +12,11 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>OwnerEdit</h4>
+        <h4>CustomerEdit</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.CustomerID)
+        @Html.HiddenFor(model => model.PersonID)
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })

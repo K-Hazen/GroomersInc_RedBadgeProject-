@@ -12,12 +12,20 @@ namespace Groomers.Services
     public class AppointmentService
     {
         private readonly ApplicationDbContext _context = new ApplicationDbContext();
+       
+        //private readonly Guid _userID; 
+
+        //public AppointmentService(Guid userID)
+        //{
+        //    _userID = userID; 
+        //}
 
         public bool CreateAppointment(AppointmentCreate model)
         {
             var entity =
                 new Appointment()
                 {
+                    
                     AppointmentDate = model.AppointmentDate,
                     StartTime = model.StartTime,
                     EndTime = model.EndTime,
@@ -43,7 +51,6 @@ namespace Groomers.Services
                 //_context.SaveChanges(); may need this 
 
             }
-            //Not sure if this will work it may just write over _context line multiple time verses making multiple copies 
 
             return _context.SaveChanges() == model.NumberOfAppointmentsAvailable;
         }
@@ -52,30 +59,30 @@ namespace Groomers.Services
 
         public IEnumerable<AppointmentListItem> GetAppointments()
         {
-            using (_context)
-            {
-                var query =
-                    _context
-                    .Appointments
-                    .Select(
-                        e =>
-                        new AppointmentListItem
-                        {
-                            AppointmentID = e.AppointmentID,
-                            AppointmentDate = e.AppointmentDate,
-                            Duration = e.Duration,
-                            IsAvailable = e.IsAvailable,
-                        });
-                return query.ToList(); 
-            }
+            var entityList = _context.Appointments.ToList();
+
+            var appointmentList =
+                entityList
+                .Select(
+                    e =>
+                    new AppointmentListItem
+                    {
+                        AppointmentID = e.AppointmentID,
+                        AppointmentDate = e.AppointmentDate,
+                        StartTime = e.StartTime,
+                        Duration = e.Duration,
+                        IsAvailable = e.IsAvailable,
+                    }).ToList();
+
+            return (appointmentList);
         }
 
         public AppointmentDetails GetAppointmentById(int appointmentID)
         {
             var entity = _context.Appointments.Find(appointmentID);
 
-            if (entity == null) 
-            return null;
+            if (entity == null)
+                return null;
 
             var model = new AppointmentDetails
             {
@@ -87,6 +94,30 @@ namespace Groomers.Services
             };
 
             return (model);
+        }
+
+        public IEnumerable<AppointmentSelect> GetAppointmentByDate(DateTimeOffset? selectedDate)
+        {
+           // var personID = _context.Customers.Where(e. => e.UserID == )
+            var entityList = _context.Appointments.ToList();
+
+            var appList =
+                entityList
+                .Where(e => e.AppointmentDate == selectedDate)
+                .Select(
+                    e => 
+                      new AppointmentSelect
+                     {
+                         AppointmentID = e.AppointmentID,
+                         //PersonID = personalID,
+                         AppointmentDate = e.AppointmentDate,
+                         StartTime = e.StartTime,
+                         IsAvailable = e.IsAvailable,
+                     }).ToList();
+            
+           var finalList = appList.OrderBy(x => x.StartTime).ToList(); 
+
+            return (finalList);
         }
 
         public bool UpdateAppointment(AppointmentEdit model)
@@ -102,10 +133,36 @@ namespace Groomers.Services
                 entity.StartTime = model.StartTime;
                 entity.EndTime = model.EndTime;
                 entity.IsAvailable = model.IsAvailable;
+                entity.PersonID = model.PersonID;
+
+                return _context.SaveChanges() == 1;
+            }
+        }
+
+        //Add logic to update appointment availability to false 
+
+        public bool BookAppointment(AppointmentBook model)
+        {
+            using (_context)
+            {
+                var entity =
+                    _context
+                    .Appointments
+                    .Single(e => e.AppointmentID == model.AppointmentID);
+
+                entity.AppointmentID = model.AppointmentID; 
+                entity.AppointmentDate = entity.AppointmentDate; 
+                entity.StartTime = entity.StartTime; 
+                entity.PetID = model.PetID;
+                entity.IsAvailable = false;
+                entity.PersonID = model.PersonID; 
 
                 return _context.SaveChanges() == 1; 
             }
+
         }
+
+
 
         public bool DeleteAppointment(int appointmentID)
         {
@@ -116,7 +173,7 @@ namespace Groomers.Services
 
             _context.Appointments.Remove(entity);
 
-            return _context.SaveChanges() == 1; 
+            return _context.SaveChanges() == 1;
         }
 
 

@@ -25,7 +25,7 @@ namespace Groomers.Services
             var entity =
                 new Employee()
                 {
-                    userID = _userID,
+                    UserID = _userID,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     EmployeeID = model.EmployeeID,
@@ -48,16 +48,18 @@ namespace Groomers.Services
 
             var petList =
                 entityList
-                .Where(e => e.userID == _userID)
+                .Where(e => e.UserID == _userID)
                 .Select(
                     e =>
                     new EmployeeListItem
                     {
                         PersonID = e.PersonID,
+                        EmployeeID = e.EmployeeID,
                         FullName = e.FullName,
                         PhoneNumber = e.PhoneNumber,
                         Email = e.Email,
                         HireDate = e.HireDate,
+                        Pets = e.Pets, 
                     }).ToList();
 
             return (petList);
@@ -83,6 +85,7 @@ namespace Groomers.Services
                 Email = entity.Email,
                 Pets = entity.Pets,
                 HireDate = entity.HireDate,
+                TerminationDate = entity.TerminationDate,
                 //appointments?
             };
 
@@ -96,7 +99,7 @@ namespace Groomers.Services
                 var entity =
                     _context
                     .Employees
-                    .Single(e => e.PersonID == model.PersonID && e.userID == _userID);
+                    .Single(e => e.PersonID == model.PersonID && e.UserID == _userID);
 
                 entity.PersonID = model.PersonID;
                 entity.EmployeeID = model.EmployeeID;
@@ -114,6 +117,7 @@ namespace Groomers.Services
             }
 
         }
+
         public bool DeleteEmployee(int id)
         {
             using (_context)
@@ -121,7 +125,7 @@ namespace Groomers.Services
                 var entity = 
                     _context
                     .Employees
-                    .Single(e => e.PersonID == id && e.userID == _userID);
+                    .Single(e => e.PersonID == id && e.UserID == _userID);
                 _context.Employees.Remove(entity);
 
                 return _context.SaveChanges() == 1;

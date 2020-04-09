@@ -12,7 +12,9 @@ namespace Groomers.Data
         //Get -- Pet --> Get -- Appointment (allows access to get appointments for owner)
         public virtual ICollection<Pet> Pets { get; set; }
 
-       
+        public virtual ICollection<Appointment> Appointments { get; set; }
+
+
         [DataType(DataType.Date)]
         public DateTimeOffset ProfileCreationDate { get; set; }
 

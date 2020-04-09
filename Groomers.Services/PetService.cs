@@ -11,10 +11,25 @@ namespace Groomers.Services
 {
     public class PetService
     {
-        private readonly ApplicationDbContext _context = new ApplicationDbContext();
+        private readonly ApplicationDbContext _context;
+        private readonly Guid _userID;
+
+        public PetService() { }
+
+        public PetService(Guid userID)
+        {
+            _context = new ApplicationDbContext();
+            _userID = userID; 
+        }
+
+
 
         public bool CreatePet(PetCreate model)
         {
+
+            var customerService = new CustomerService(_userID);
+            var customerDetail = customerService.GetCustomerByCurrentUserId();
+
             var entity =
                 new Pet()
                 {
@@ -24,7 +39,7 @@ namespace Groomers.Services
                     SpecialRequest = model.SpecialRequest,
                     Birthday = model.Birthday,
                     DateAdded = DateTimeOffset.Now,
-                    PersonID = model.PersonID, 
+                    PersonID = customerDetail.PersonID,
                 };
 
             _context.Pets.Add(entity);
@@ -55,6 +70,32 @@ namespace Groomers.Services
             
         }
 
+        public IEnumerable<PetListItem> GetPetsByUserID()
+        {
+
+            //_context.Pets where e.Person.UserID
+            var entityList = _context.Pets.ToList();
+
+            var petList =
+                entityList
+                    .Where(e => e.Person.UserID == _userID)
+                    .Select(
+                        e =>
+                        new PetListItem
+                        {
+                            PetID = e.PetID,
+                            Name = e.Name,
+                            SizeOfDog = e.SizeOfDog,
+                            IsHairLong = e.IsHairLong,
+                            SpecialRequest = e.SpecialRequest,
+                            DateAdded = e.DateAdded,
+                            PersonID = e.PersonID,
+                        }).ToList();
+
+            return (petList);
+
+        }
+
         public PetDetail GetPetById(int id)
         {
             using (_context)
@@ -63,10 +104,7 @@ namespace Groomers.Services
                     _context
                     .Pets
                     .Single(e => e.PetID == id);
-
-                //List<AppointmentDetails> listOfAppointments = new List<AppointmentDetails>();
-                //foreach through entity's appointments and create a new AppointmentDetail for each one, then add to the list of AppointmentDetails
-
+                
                 return
                 new PetDetail
                 {
@@ -75,9 +113,15 @@ namespace Groomers.Services
                     SizeOfDog = entity.SizeOfDog,
                     SpecialRequest = entity.SpecialRequest,
                     Birthday = entity.Birthday,
-                    PersonID = entity.PersonID,
-                    Appointments = entity.Appointments, //listOfAppointments 
-
+                   // PersonID = entity.PersonID,
+                    FullName = entity.Person.FullName, 
+                    DateAdded = entity.DateAdded,
+                    DateModified = entity.DateModified,
+                    Appointments = entity.Appointments.Select(app => new AppointmentDetails
+                    {
+                        AppointmentDate = app.AppointmentDate,
+                        StartTime = app.StartTime,
+                    })
                 };
             }
         }
@@ -117,5 +161,7 @@ namespace Groomers.Services
             }
         }
 
+        
     }
+
 }

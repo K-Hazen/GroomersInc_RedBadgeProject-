@@ -1,6 +1,8 @@
-﻿using Groomers.Models;
+﻿using Groomers.Data;
+using Groomers.Models;
 using Groomers.Services;
 using Groonmers.Data;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,15 +17,23 @@ namespace RedBadgeProject.WebMVC.Controllers
         private ApplicationDbContext _dB = new ApplicationDbContext(); 
 
         // GET: Pet (View = ListItem)
+        //public ActionResult Index() ---> May still need this for admin role
+        //{
+        //    var service = CreatePetService();
+        //    var model = service.GetPets(); 
+        //    return View(model);
+        //}
+
         public ActionResult Index()
         {
             var service = CreatePetService();
-            var model = service.GetPets(); 
+            var model = service.GetPetsByUserID();
             return View(model);
         }
-
+        // Get: calls the view with the form to "build" a pet
         public ActionResult Create()
         {
+     
             return View(); 
         }
 
@@ -126,9 +136,15 @@ namespace RedBadgeProject.WebMVC.Controllers
         //helper
         private PetService CreatePetService()
         {
-            var service = new PetService();
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new PetService(userId);
             return service; 
         }
-
+        private CustomerService CreateCustomerService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new CustomerService(userId);
+            return service;
+        }
     }
 }

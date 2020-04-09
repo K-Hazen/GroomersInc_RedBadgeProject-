@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppointmentService.cs" />
-    <Compile Include="CustomerServices.cs" />
+    <Compile Include="CustomerService.cs" />
     <Compile Include="EmployeeService.cs" />
     <Compile Include="PetService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -15,7 +15,7 @@ namespace Groomers.Data
         [Required]
         public DateTimeOffset HireDate { get; set; }
 
-        public DateTimeOffset TerminationDate { get; set; }
+        public DateTimeOffset? TerminationDate { get; set; }
 
         public string JobTitle { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Groomers.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -20,14 +21,14 @@ namespace Groomers.Models
         [Required]
         [Display(Name = "Appointment Start Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset StartTime { get; set; }
 
 
         [Required]
         [Display(Name = "Appointment End Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset EndTime { get; set; }
 
 
@@ -51,15 +52,22 @@ namespace Groomers.Models
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime AppointmentDate { get; set; }
 
+        [Display(Name = "Appointment Time")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh:mm tt}")]
+        public DateTimeOffset StartTime { get; set; }
 
         [Display(Name = "Duration")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+       //[DisplayFormat(DataFormatString = "{0:HH:MM}")]
         public TimeSpan Duration { get; set; }
-
 
         [DefaultValue(true)]
         public bool IsAvailable { get; set; }
+
+        public int? PetID { get; set; }
+
+        public string PetName { get; set; }
 
 
         //[DataType(DataType.Currency)]
@@ -80,20 +88,21 @@ namespace Groomers.Models
 
         [Display(Name = "Appointment Start Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm tt}")]
         public DateTimeOffset StartTime { get; set; }
 
 
 
         [Display(Name = "Appointment End Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        [DisplayFormat(DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset EndTime { get; set; }
-
 
 
         [DefaultValue(true)]
         public bool IsAvailable { get; set; }
+
+        public int? PersonID { get; set; }
 
 
         //[DataType(DataType.Currency)]
@@ -108,25 +117,29 @@ namespace Groomers.Models
 
         [Display(Name = "Appointment Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime AppointmentDate { get; set; }
 
 
         [Display(Name = "Appointment Start Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset StartTime { get; set; }
 
 
 
         [Display(Name = "Appointment End Time")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:MM}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset EndTime { get; set; }
 
 
         [DefaultValue(true)]
+        [Display(Name = "Available")]
+
         public bool IsAvailable { get; set; }
+
+        public int? PersonID { get; set; }
 
 
         //[DataType(DataType.Currency)]
@@ -134,4 +147,57 @@ namespace Groomers.Models
         //public decimal Price { get; set; }
     }
 
+    public class AppointmentSelect
+    {
+        public int AppointmentID { get; set; }
+
+        [Display(Name = "Appointment Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTimeOffset AppointmentDate { get; set; }
+
+
+        [Display(Name = "Appointment Start Time")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{0:hh:mm tt}")]
+        public DateTimeOffset StartTime { get; set; }
+
+        [DefaultValue(true)]
+        [Display(Name = "Available")]
+        public bool IsAvailable { get; set; }
+
+    }
+
+    public class AppointmentBook
+    {
+        public int AppointmentID { get; set; }
+
+        [Display(Name = "Appointment Date")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        public DateTime AppointmentDate { get; set; }
+
+
+        [Display(Name = "Appointment Start Time")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm}")]
+        public DateTimeOffset StartTime { get; set; }
+
+
+
+        [Display(Name = "Appointment End Time")]
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh:mm}")]
+        public DateTimeOffset EndTime { get; set; }
+
+
+        [DefaultValue(true)]
+        [Display(Name = "Available")]
+        public bool IsAvailable { get; set; }
+
+        [Display(Name = "Select Pet")]
+        public int PetID { get; set; }
+
+        public int? PersonID { get; set; }
+    }
 }

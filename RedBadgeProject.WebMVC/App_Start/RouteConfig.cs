@@ -18,6 +18,12 @@ namespace RedBadgeProject.WebMVC
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+        //    routes.MapRoute(
+        //        name: "AppointmentSelection",
+        //        url: "{controller}/{action}/{id}",
+        //        defaults: new { controller = "Appointment", action = "SelectAppointmentDate", selectedDate = UrlParameter.Optional }
+        //        );
         }
     }
 }

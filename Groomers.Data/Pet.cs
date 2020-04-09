@@ -14,11 +14,24 @@ namespace Groomers.Data
     public class Pet
     {
         [JsonConverter(typeof(StringEnumConverter))]
-        public enum DogSize { Toy_1_12lbs = 1, Small_12_25lbs = 2, Medium_25_50lbs = 3, Large_50_100lbs = 4, Extra_Large_100_and_up = 5}
+        public enum DogSize {
+            [Display(Name = "No Selection")]
+            No_Selection = 0,
+            [Display(Name = "Toy (1 - 12lbs)")]
+            Toy_1_12lbs = 1,
+            [Display(Name = "Small (12 - 15lbs)")]
+            Small_12_25lbs = 2,
+            [Display(Name = "Medium (25 - 50lbs)")]
+            Medium_25_50lbs = 3,
+            [Display(Name = "Large (50 - 100lbs)")]
+            Large_50_100lbs = 4,
+            [Display(Name = "XL (100lbs and up)")]
+            Extra_Large_100_and_up = 5}
 
 
         [Key]
         public int PetID { get; set; }
+
 
         [Required]
         public string Name { get; set; }
@@ -51,7 +64,7 @@ namespace Groomers.Data
         public int PersonID { get; set; }
         public virtual Person Person { get; set; }
 
-        
+
         public virtual ICollection<Appointment> Appointments { get; set; }
 
 
