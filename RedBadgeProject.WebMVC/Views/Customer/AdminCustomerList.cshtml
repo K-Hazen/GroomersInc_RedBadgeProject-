@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Groomers.Models.CustomerListItem>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "AdminCustomerList";
 }
 
-<h2>Customer View List</h2>
+<h2>AdminCustomerList</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -41,9 +41,6 @@
         <th>
             @Html.DisplayNameFor(model => model.ProfileModifiedDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Pets)
-        </th>
         <th></th>
     </tr>
 
@@ -51,8 +48,7 @@
     {
         <tr>
             <td>
-                @Html.HiddenFor(modelItem => item.PersonID)
-                @*@Html.DisplayFor(modelItem => item.PersonID)*@
+                @Html.DisplayFor(modelItem => item.PersonID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FullName)
@@ -68,13 +64,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProfileModifiedDate)
-            </td>
-            <td>
-
-                @foreach (var p in item.Pets)
-                {
-                    @p.Name
-                }
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.PersonID }) |

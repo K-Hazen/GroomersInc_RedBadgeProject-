@@ -14,9 +14,11 @@ namespace RedBadgeProject.WebMVC.Controllers
     public class AppointmentController : Controller
     {
         private ApplicationDbContext _dB = new ApplicationDbContext();
-      
-        
+
+
         // GET: Appointment
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Appointment/Index")]
         public ActionResult Index()
         {
             var service = CreateAppointmentService();
@@ -34,11 +36,14 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Appointment/Create")]
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
 
@@ -60,6 +65,8 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Appointment/Details")]
         public ActionResult Details(int id)
         {
             var service = CreateAppointmentService();
@@ -68,6 +75,8 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Appointment/Edit")]
         public ActionResult Edit(int id)
         {
             var service = CreateAppointmentService();
@@ -170,7 +179,8 @@ namespace RedBadgeProject.WebMVC.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Appointment/Delete")]
         [ActionName("Delete")]
 
         public ActionResult Delete(int id)

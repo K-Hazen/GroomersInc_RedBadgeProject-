@@ -43,7 +43,31 @@ namespace Groomers.Services
             return _context.SaveChanges() == 1;
         }
 
-        //GET -- Contact Info
+        //GET
+        public IEnumerable<CustomerListItem> GetCustomersAdminOnly()
+        {
+            var entityList = _context.Customers.ToList();
+
+            var customerList =
+                entityList
+                 .Select(
+                    e =>
+                        new CustomerListItem
+                        {
+                            PersonID = e.PersonID,
+                            FullName = e.FullName,
+                            PhoneNumber = e.PhoneNumber,
+                            Email = e.Email,
+                            ProfileCreationDate = e.ProfileCreationDate,
+                            ProfileModifiedDate = e.ProfileModifiedDate,
+                            Pets = e.Pets.Select(pet => new PetListItem
+                            {
+                                Name = $"{pet.Name}, ",
+                            }).ToList()
+                        }).ToList();
+
+            return (customerList);
+        }
 
         public IEnumerable<CustomerListItem> GetCustomers()
         {
@@ -70,7 +94,7 @@ namespace Groomers.Services
 
             return (customerList);
         }
-        // create a new method for Get CustomerByCurrentUserId
+      
 
         public CustomerDetail GetCustomerByCurrentUserId()
         {

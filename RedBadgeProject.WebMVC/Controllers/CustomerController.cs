@@ -16,12 +16,23 @@ namespace RedBadgeProject.WebMVC.Controllers
         private ApplicationDbContext _dB = new ApplicationDbContext();
 
 
-
         // GET: Customer
+
+        [Authorize(Roles = "User")]
+        [Route("User/Customer/Index")]
         public ActionResult Index()
         {
             var service = CreateCustomerService();
             var model = service.GetCustomers();
+            return View(model);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Customer/AdminCustomerList")]
+        public ActionResult AdminCustomerList()
+        {
+            var service = CreateCustomerService();
+            var model = service.GetCustomersAdminOnly();
             return View(model);
         }
 

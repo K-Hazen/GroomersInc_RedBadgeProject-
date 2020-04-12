@@ -3,27 +3,14 @@
 @using (Html.BeginForm("SelectAppointmentDate", "Appointment", FormMethod.Post))
 {
     <div class="form-group">
-        @Html.LabelFor(model => model.SearchDate, htmlAttributes: new { @class = "control-label col-md-2" })
+      
+            @Html.LabelFor(model => model.SearchDate, htmlAttributes: new { @class = "control-label col-md-2" })
+      
 
         <div class="col-md-8 col-md-offset-2">
             @Html.EditorFor(model => model.SearchDate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.SearchDate, "", new { @class = "text-danger" })
         </div>
-
-
-
-        @*<div>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.PersonID)
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.PersonID)
-                </dd>
-                @Html.HiddenFor(model => model.PersonID)
-            </dl>
-        </div>*@
     </div>
 
 
