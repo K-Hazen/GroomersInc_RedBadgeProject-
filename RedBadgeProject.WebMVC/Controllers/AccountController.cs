@@ -221,7 +221,7 @@ namespace RedBadgeProject.WebMVC.Controllers
                     await UserManager.AddToRoleAsync(user.Id, "User");
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("UserIndex", "Users");
+                    return RedirectToAction("Create", "Customer");
                 }
                 //  ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
 

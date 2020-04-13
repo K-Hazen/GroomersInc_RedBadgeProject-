@@ -4,31 +4,33 @@
     ViewBag.Title = "SelectAppointmentDate";
 }
 
-<h2>SelectAppointmentDate</h2>
+<h2>Select Appointment</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@Html.Partial("SearchDate", new Groomers.Models.SearchDatePV())
+
+
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AppointmentID)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.AppointmentID)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.AppointmentDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.StartTime)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAvailable)
+        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
+        @Html.HiddenFor(modelItem => item.AppointmentID)
+        @*@Html.DisplayFor(modelItem => item.AppointmentID)*@
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppointmentID)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AppointmentDate)
             </td>
@@ -40,9 +42,17 @@
                 {
                     @Html.ActionLink("Book", "BookAppointment", new { id = item.AppointmentID })
                 }
-                else {<p>Not Available</p>}
+                else
+                {<p>Not Available</p>}
             </td>
+            <td></td>
         </tr>
     }
 
 </table>
+
+<p>
+    @Html.ActionLink("Back to Home", "UserIndex", "Users")
+</p>
+
+

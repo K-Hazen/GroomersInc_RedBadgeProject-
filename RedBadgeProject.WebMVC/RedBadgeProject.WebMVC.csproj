@@ -380,6 +380,7 @@
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\AuthorizeFailed.cshtml" />
     <Content Include="Views\Account\RegisterRoles.cshtml" />
+    <Content Include="Views\Shared\_AnotherSearchDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

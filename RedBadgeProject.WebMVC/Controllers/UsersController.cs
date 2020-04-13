@@ -1,4 +1,5 @@
-﻿using Groonmers.Data;
+﻿using Groomers.Services;
+using Groonmers.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using RedBadgeProject.WebMVC.CustomFilters;
@@ -16,8 +17,18 @@ namespace RedBadgeProject.WebMVC.Controllers
         [Route("UserIndex")]
         public ActionResult UserIndex()
         {
-            return View();
+            var service = CreateCustomerService();
+            var model = service.GetCustomerHomePage(); 
+            return View(model);
         }
+
+        private CustomerService CreateCustomerService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new CustomerService(userId);
+            return service;
+        }
+
     }
 
 

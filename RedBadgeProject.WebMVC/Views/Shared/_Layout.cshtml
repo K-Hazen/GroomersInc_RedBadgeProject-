@@ -17,11 +17,39 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Groomers Inc.", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @if (User.IsInRole("Admin"))
+                {
+
+                    @Html.ActionLink("Groomers Inc.", "AdminIndex", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else if (User.IsInRole("User"))
+                {
+                    @Html.ActionLink("Groomers Inc.", "UserIndex", "Users", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else
+                {
+
+                    @Html.ActionLink("Groomers Inc.", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Home", "AmdinIndex", "Index")</li>
+
+                    }
+                    else if (User.IsInRole("User"))
+                    {
+                        <li>@Html.ActionLink("Home", "UserIndex", "Users")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    }
+
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
                     @*<li>@Html.ActionLink("Manage Roles", "Index", "Role") </li>*@
 
                     @if (User.Identity.IsAuthenticated)

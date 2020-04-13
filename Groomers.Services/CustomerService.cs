@@ -131,6 +131,21 @@ namespace Groomers.Services
             return (model);
         }
 
+        public CustomerHomePage GetCustomerHomePage()
+        {
+            var entity = _context.Customers.Single(e => e.UserID == _userID);
+
+            if (entity == null) return null;
+
+            var model = new CustomerHomePage
+            {
+                PersonID = entity.PersonID,
+                FirstName = entity.FirstName,
+                UserID = _userID,
+            };
+
+            return (model);
+        }
 
         public CustomerDetail GetCustomerById(int id)
         {
@@ -158,7 +173,6 @@ namespace Groomers.Services
                     AppointmentDate = app.AppointmentDate,
                     StartTime = app.StartTime,
                     PetID = app.PetID,
-                   // PetName = entity.Pets.Where(e => e.PetID == app.PetID).Select(e => new PetListItem { Name = e.Name }).ToString()
                 }); 
             }
 

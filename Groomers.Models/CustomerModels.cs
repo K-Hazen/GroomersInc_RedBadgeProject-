@@ -168,4 +168,14 @@ namespace Groomers.Models
         //list of pets? So if they need to remove one from their profile
     }
 
+    public class CustomerHomePage
+    {
+        public int PersonID { get; set; }
+
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        public Guid UserID { get; set; }
+
+    }
 }

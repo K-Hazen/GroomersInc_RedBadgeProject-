@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Your Pets</h2>
 
 <p>
-    @Html.ActionLink("Create New Pet", "Create")
+    @Html.ActionLink("Add A New Pet", "Create")
 </p>
 
 @if (TempData.ContainsKey("SaveResult"))
@@ -23,9 +23,9 @@
 
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.PetID)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -42,17 +42,17 @@
             @Html.DisplayNameFor(model => model.DateAdded)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.PersonID)
-        </th>*@
+                @Html.DisplayNameFor(model => model.PersonID)
+            </th>*@
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
+                @Html.HiddenFor(modelItem => item.PetID)
+                @*@Html.DisplayFor(modelItem => item.PetID)*@
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PetID)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -69,8 +69,8 @@
                 @Html.DisplayFor(modelItem => item.DateAdded)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.PersonID)
-            </td>*@
+                    @Html.DisplayFor(modelItem => item.PersonID)
+                </td>*@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.PetID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.PetID }) |
@@ -78,5 +78,9 @@
             </td>
         </tr>
     }
-
 </table>
+
+<div>
+     @Html.ActionLink("Back to Home", "UserIndex", "Users")
+</div>
+

@@ -1,34 +1,45 @@
-﻿
+﻿@model Groomers.Models.CustomerHomePage
+
 @{
     ViewBag.Title = "User Homepage";
 }
 
-    <div class="jumbotron">
-        <h1>Welcome Customers! </h1>
-        <p class="lead">Looking to book your favorite family member a day at the spa!?!? You are in the right place. Just input a date and hit the search button and off you go!</p>
-        @Html.Partial("SearchDate", new Groomers.Models.SearchDatePV())
-        @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
     </div>
+}
+
+<div class="jumbotron">
+    <h1>Welcome @Html.DisplayFor(model => model.FirstName)! </h1>
+    <p class="lead">Looking to book your favorite family member a day at the spa!?!? You are in the right place. Just input a date and hit the search button and off you go!</p>
+    @Html.Partial("SearchDate", new Groomers.Models.SearchDatePV())
+    @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
 
 <div class="row">
-    @*<div class="col-md-4">
-        <h2>Book An Appointment</h2>
+    <div class="col-md-4">
+        <h2>Add your Pet</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            We love our customers, but we love their dogs more! Please create a profile for your pet so we have all their important details.
         </p>
-        @Html.Partial("SearchDate", new Groomers.Models.SearchDatePV())*@
-        @*<p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>*@
+        <p><a class="btn btn-default" href=@Url.Action("Create","Pet")>Add A Pet &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Add Another User</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>View Appointments</h2>
+        <p>Need to check in on you appointments? No worries, we got you covered. Just click here to see what you have scheduled. </p>
+        <p><a class="btn btn-default" href=@Url.Action("Details", "Customer", new { id = Model.PersonID })>See Appointments &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>Edit/Update Profile</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <p>Make changes to your contact info etc... here. </p>
+        <p><a class="btn btn-default" href=@Url.Action("Edit","Customer", new { id = Model.PersonID })>Update Customer &raquo;</a></p>
+        <br/> 
+        <p><a class="btn btn-default" href=@Url.Action("Index","Pet", new { id = Model.UserID })>Update Pet &raquo;</a></p>
     </div>
 </div>

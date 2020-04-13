@@ -163,7 +163,7 @@ namespace Groomers.Models
         public DateTimeOffset StartTime { get; set; }
 
         [DefaultValue(true)]
-        [Display(Name = "Available")]
+        [Display(Name = "Availability")]
         public bool IsAvailable { get; set; }
 
     }

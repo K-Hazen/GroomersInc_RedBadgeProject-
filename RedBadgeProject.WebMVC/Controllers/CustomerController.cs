@@ -53,7 +53,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             if (service.CreateCustomer(model))
             {
                 TempData["SaveResult"] = "Your profile was created.";
-                return RedirectToAction("Index");
+                return RedirectToAction("UserIndex", "Users");
             }
 
             ModelState.AddModelError("", "Your profile could not be created");
@@ -112,7 +112,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             if (service.UpdateCustomer(model))
             {
                 TempData["SaveResult"] = "Your profile has been updated.";
-                return RedirectToAction("Index");
+                return RedirectToAction("UserIndex", "Users");
             }
 
             ModelState.AddModelError("", "Your profile could not be updated.");
