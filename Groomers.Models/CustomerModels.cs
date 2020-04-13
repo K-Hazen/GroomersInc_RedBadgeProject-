@@ -98,6 +98,35 @@ namespace Groomers.Models
     }
 
   
+    public class AdminCustomerListItem
+    {
+        public int PersonID { get; set; }
+
+        [Display(Name = "Name")]
+        public string FullName { get; set; }
+
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
+        public long PhoneNumber { get; set; }
+
+
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [Display(Name = "Created On")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTimeOffset ProfileCreationDate { get; set; }
+
+        [Display(Name = "Modified On")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTimeOffset? ProfileModifiedDate { get; set; }
+
+        public List<PetListItem> Pets { get; set; }
+    }
+
     public class CustomerListItem
     {
         public int PersonID { get; set; }
@@ -114,15 +143,10 @@ namespace Groomers.Models
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
-        [Display(Name = "Profile Created On")]
+        [Display(Name = "Created On")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTimeOffset ProfileCreationDate { get; set; }
-
-        [Display(Name = "Profile Modified On")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTimeOffset? ProfileModifiedDate { get; set; }
 
         public List<PetListItem> Pets { get; set; }
     }

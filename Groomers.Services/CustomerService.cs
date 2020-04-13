@@ -44,7 +44,7 @@ namespace Groomers.Services
         }
 
         //GET
-        public IEnumerable<CustomerListItem> GetCustomersAdminOnly()
+        public IEnumerable<AdminCustomerListItem> GetCustomersAdminOnly()
         {
             var entityList = _context.Customers.ToList();
 
@@ -52,7 +52,7 @@ namespace Groomers.Services
                 entityList
                  .Select(
                     e =>
-                        new CustomerListItem
+                        new AdminCustomerListItem
                         {
                             PersonID = e.PersonID,
                             FullName = e.FullName,
@@ -85,7 +85,7 @@ namespace Groomers.Services
                             PhoneNumber = e.PhoneNumber,
                             Email = e.Email,
                             ProfileCreationDate = e.ProfileCreationDate,
-                            ProfileModifiedDate = e.ProfileModifiedDate,
+                            //ProfileModifiedDate = e.ProfileModifiedDate,
                             Pets = e.Pets.Select(pet => new PetListItem
                             {
                                 Name = $"{pet.Name}, ",

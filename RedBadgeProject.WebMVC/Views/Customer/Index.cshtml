@@ -4,11 +4,11 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Customer View List</h2>
+<h2>Quick Profile</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@*<p>
+    @Html.ActionLink("Add Another User", "Create")
+</p>*@
 
 @if (TempData.ContainsKey("SaveResult"))
 {
@@ -38,9 +38,9 @@
         <th>
             @Html.DisplayNameFor(model => model.ProfileCreationDate)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.ProfileModifiedDate)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Pets)
         </th>
@@ -51,7 +51,7 @@
     {
                 @Html.HiddenFor(modelItem => item.PersonID)
                 @*@Html.DisplayFor(modelItem => item.PersonID)*@
-        <tr>       
+        <tr>           
             <td>
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
@@ -64,9 +64,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProfileCreationDate)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.ProfileModifiedDate)
-            </td>
+            </td>*@
             <td>
 
                 @foreach (var p in item.Pets)
@@ -75,8 +75,8 @@
                 }
             </td>
             <td>
+                @Html.ActionLink("Profile", "Details", new { id = item.PersonID }) |
                 @Html.ActionLink("Edit", "Edit", new { id = item.PersonID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PersonID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.PersonID })
             </td>
         </tr>
