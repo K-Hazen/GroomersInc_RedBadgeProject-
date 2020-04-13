@@ -5,10 +5,20 @@
     //int personID = Model.PersonID;
 }
 
-<h2>Details</h2>
+<h3>Profile Page</h3>
+
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
 
 <div>
-    <h4>CustomerDetail</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -110,7 +120,7 @@
                     </li>
                     <li>
                         @Html.DisplayNameFor(model => p.PetName)
-                        
+
                         @Html.DisplayFor(model => p.PetName, new { htmlAttributes = new { @class = "form-control" } })
                     </li>
                 </ul>
@@ -119,7 +129,7 @@
     </dl>
 </div>
 
-@Html.Partial("SearchDate", new Groomers.Models.SearchDatePV() @*{ PersonID = personID }*@)
+@Html.Partial("SearchDate", new Groomers.Models.SearchDatePV())
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PersonID }) |

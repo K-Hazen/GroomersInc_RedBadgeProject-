@@ -44,7 +44,7 @@ namespace RedBadgeProject.WebMVC.Controllers
                 return RedirectToAction("Appointment/SelectAppointmentDate");
             }
 
-            ModelState.AddModelError("", "Your date was invalid");
+            ModelState.AddModelError("", "Sorry, either you date was invalid or a schedule has not yet been created for that day.");
             return View(model);
 
         }

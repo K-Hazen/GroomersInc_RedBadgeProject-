@@ -43,7 +43,31 @@ namespace Groomers.Services
             return _context.SaveChanges() == 1;
         }
 
-        //GET -- Contact Info
+        //GET
+        public IEnumerable<AdminCustomerListItem> GetCustomersAdminOnly()
+        {
+            var entityList = _context.Customers.ToList();
+
+            var customerList =
+                entityList
+                 .Select(
+                    e =>
+                        new AdminCustomerListItem
+                        {
+                            PersonID = e.PersonID,
+                            FullName = e.FullName,
+                            PhoneNumber = e.PhoneNumber,
+                            Email = e.Email,
+                            ProfileCreationDate = e.ProfileCreationDate,
+                            ProfileModifiedDate = e.ProfileModifiedDate,
+                            Pets = e.Pets.Select(pet => new PetListItem
+                            {
+                                Name = $"{pet.Name}, ",
+                            }).ToList()
+                        }).ToList();
+
+            return (customerList);
+        }
 
         public IEnumerable<CustomerListItem> GetCustomers()
         {
@@ -61,7 +85,7 @@ namespace Groomers.Services
                             PhoneNumber = e.PhoneNumber,
                             Email = e.Email,
                             ProfileCreationDate = e.ProfileCreationDate,
-                            ProfileModifiedDate = e.ProfileModifiedDate,
+                            //ProfileModifiedDate = e.ProfileModifiedDate,
                             Pets = e.Pets.Select(pet => new PetListItem
                             {
                                 Name = $"{pet.Name}, ",
@@ -70,7 +94,7 @@ namespace Groomers.Services
 
             return (customerList);
         }
-        // create a new method for Get CustomerByCurrentUserId
+      
 
         public CustomerDetail GetCustomerByCurrentUserId()
         {
@@ -107,6 +131,21 @@ namespace Groomers.Services
             return (model);
         }
 
+        public CustomerHomePage GetCustomerHomePage()
+        {
+            var entity = _context.Customers.Single(e => e.UserID == _userID);
+
+            if (entity == null) return null;
+
+            var model = new CustomerHomePage
+            {
+                PersonID = entity.PersonID,
+                FirstName = entity.FirstName,
+                UserID = _userID,
+            };
+
+            return (model);
+        }
 
         public CustomerDetail GetCustomerById(int id)
         {
@@ -134,7 +173,6 @@ namespace Groomers.Services
                     AppointmentDate = app.AppointmentDate,
                     StartTime = app.StartTime,
                     PetID = app.PetID,
-                   // PetName = entity.Pets.Where(e => e.PetID == app.PetID).Select(e => new PetListItem { Name = e.Name }).ToString()
                 }); 
             }
 

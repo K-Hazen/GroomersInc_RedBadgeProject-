@@ -10,11 +10,14 @@ using System.Web.Mvc;
 
 namespace RedBadgeProject.WebMVC.Controllers
 {
-    [Authorize]
+   
     public class EmployeeController : Controller
     {
         private ApplicationDbContext _dB = new ApplicationDbContext();
+
         // GET: Employee
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Employee/Index")]
         public ActionResult Index()
         {
             var service = CreateEmployeeService();
@@ -22,6 +25,8 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Employee/Create")]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +52,8 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Employee/Details")]
         public ActionResult Details(int id)
         {
             var service = CreateEmployeeService();
@@ -55,6 +62,8 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Employee/Edit")]
         public ActionResult Edit(int id)
         {
             var service = CreateEmployeeService();
@@ -104,8 +113,9 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Employee/Delete")]
         [ActionName("Delete")]
-
         public ActionResult Delete(int id)
         {
             var service = CreateEmployeeService();

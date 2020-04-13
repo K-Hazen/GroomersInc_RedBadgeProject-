@@ -1,14 +1,14 @@
-﻿@model IEnumerable<Groomers.Models.CustomerListItem>
+﻿@model IEnumerable<Groomers.Models.AdminCustomerListItem>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "AdminCustomerList";
 }
 
-<h2>Quick Profile</h2>
+<h2>Customer List</h2>
 
-@*<p>
-    @Html.ActionLink("Add Another User", "Create")
-</p>*@
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 
 @if (TempData.ContainsKey("SaveResult"))
 {
@@ -23,9 +23,9 @@
 
 <table class="table">
     <tr>
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.PersonID)
-        </th>*@
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.FullName)
         </th>
@@ -38,20 +38,18 @@
         <th>
             @Html.DisplayNameFor(model => model.ProfileCreationDate)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.ProfileModifiedDate)
-        </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.Pets)
+            @Html.DisplayNameFor(model => model.ProfileModifiedDate)
         </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-                @Html.HiddenFor(modelItem => item.PersonID)
-                @*@Html.DisplayFor(modelItem => item.PersonID)*@
-        <tr>           
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonID)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
@@ -64,19 +62,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProfileCreationDate)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.ProfileModifiedDate)
-            </td>*@
             <td>
-
-                @foreach (var p in item.Pets)
-                {
-                    @p.Name
-                }
+                @Html.DisplayFor(modelItem => item.ProfileModifiedDate)
             </td>
             <td>
-                @Html.ActionLink("Profile", "Details", new { id = item.PersonID }) |
                 @Html.ActionLink("Edit", "Edit", new { id = item.PersonID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PersonID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.PersonID })
             </td>
         </tr>
