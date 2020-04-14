@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Groomers.Models.CustomerListItem>
+﻿@model Groomers.Models.CustomerListItem
 
 @{
     ViewBag.Title = "Index";
@@ -47,39 +47,38 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
-    {
-                @Html.HiddenFor(modelItem => item.PersonID)
+
+                @Html.HiddenFor(modelItem => Model.PersonID)
                 @*@Html.DisplayFor(modelItem => item.PersonID)*@
         <tr>           
             <td>
-                @Html.DisplayFor(modelItem => item.FullName)
+                @Html.DisplayFor(modelItem => Model.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                @Html.DisplayFor(modelItem => Model.PhoneNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => Model.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProfileCreationDate)
+                @Html.DisplayFor(modelItem => Model.ProfileCreationDate)
             </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item.ProfileModifiedDate)
             </td>*@
             <td>
 
-                @foreach (var p in item.Pets)
+                @foreach (var p in Model.Pets)
                 {
                     @p.Name
                 }
             </td>
             <td>
-                @Html.ActionLink("Profile", "Details", new { id = item.PersonID }) |
-                @Html.ActionLink("Edit", "Edit", new { id = item.PersonID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PersonID })
+                @Html.ActionLink("Profile", "Details", new { id = Model.PersonID }) |
+                @Html.ActionLink("Edit", "Edit", new { id = Model.PersonID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = Model.PersonID })
             </td>
         </tr>
-    }
+ 
 
 </table>

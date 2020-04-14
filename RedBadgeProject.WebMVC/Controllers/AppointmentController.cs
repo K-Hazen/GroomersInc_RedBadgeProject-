@@ -44,6 +44,7 @@ namespace RedBadgeProject.WebMVC.Controllers
         }
 
         [Authorize(Roles = "Admin")]
+        [Route("Admin/Appointment/Create")]
         [HttpPost]
         [ValidateAntiForgeryToken]
 
@@ -96,6 +97,7 @@ namespace RedBadgeProject.WebMVC.Controllers
 
 
         [HttpPost]
+        [Route("Admin/Appointment/Edit")]
         [ValidateAntiForgeryToken]
 
         public ActionResult Edit(int id, AppointmentEdit model)
@@ -192,6 +194,8 @@ namespace RedBadgeProject.WebMVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Appointment/Delete")]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
 

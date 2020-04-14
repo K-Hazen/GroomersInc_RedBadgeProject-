@@ -75,7 +75,7 @@ namespace Groomers.Services
 
             var customerList =
                 entityList
-                 .Where(e => e.UserID == _userID)
+                 //.Where(e => e.UserID == _userID)
                  .Select(
                     e =>
                         new CustomerListItem
@@ -96,7 +96,7 @@ namespace Groomers.Services
         }
       
 
-        public CustomerDetail GetCustomerByCurrentUserId()
+        public CustomerListItem GetCustomerByCurrentUserId()
         {
             var entity = _context.Customers.Single(e => e.UserID == _userID);
 
@@ -114,15 +114,10 @@ namespace Groomers.Services
                 });
             }
 
-            var model = new CustomerDetail
+            var model = new CustomerListItem
             {
                 PersonID = entity.PersonID,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                StreetAddress = entity.StreetAddress,
-                City = entity.City,
-                State = entity.State,
-                ZipCode = entity.ZipCode,
+                FullName = entity.FullName,
                 PhoneNumber = entity.PhoneNumber,
                 Email = entity.Email,
                 Pets = petList,
@@ -166,6 +161,7 @@ namespace Groomers.Services
             }
 
             List<AppointmentListItem> appList = new List<AppointmentListItem>();
+            List<AppointmentListItem> appListSorted = new List<AppointmentListItem>();
             foreach (var app in entity.Appointments)
             {
                 appList.Add(new AppointmentListItem
@@ -174,6 +170,8 @@ namespace Groomers.Services
                     StartTime = app.StartTime,
                     PetID = app.PetID,
                 }); 
+
+                appListSorted = appList.OrderBy(x => x.AppointmentDate).ToList();
             }
 
             var model = new CustomerDetail
@@ -188,7 +186,7 @@ namespace Groomers.Services
                 PhoneNumber = entity.PhoneNumber,
                 Email = entity.Email,
                 Pets = petList,
-                Appointments = appList,
+                Appointments = appListSorted,
             };
             return (model);
 

@@ -75,6 +75,7 @@ namespace Groomers.Services
             var model = new EmployeeDetail
             {
                 PersonID = entity.PersonID,
+                EmployeeID = entity.EmployeeID, 
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
                 StreetAddress = entity.StreetAddress,
@@ -86,7 +87,6 @@ namespace Groomers.Services
                 Pets = entity.Pets,
                 HireDate = entity.HireDate,
                 TerminationDate = entity.TerminationDate,
-                //appointments?
             };
 
             return (model);

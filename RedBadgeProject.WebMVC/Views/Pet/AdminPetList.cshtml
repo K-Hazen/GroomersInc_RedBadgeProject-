@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Groomers.Models.PetListItem>
+
+@{
+    ViewBag.Title = "AdminListOfPets";
+}
+
+<h2>All Pets</h2>
+
+<p>
+    @Html.ActionLink("Add Pet", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PetID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsHairLong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecialRequest)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PetID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsHairLong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecialRequest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateAdded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OwnerName)
+        </td>
+        <td>
+            @Html.ActionLink("Profile", "Details", new { id = item.PetID }) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.PetID}) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PetID })
+        </td>
+    </tr>
+}
+
+</table>

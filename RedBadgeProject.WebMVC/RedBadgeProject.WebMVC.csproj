@@ -222,6 +222,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Views\Users\AuthorizeFailed.cshtml" />
+    <None Include="Properties\PublishProfiles\GroomersIncTest1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -381,6 +383,8 @@
     <Content Include="Views\Admin\AuthorizeFailed.cshtml" />
     <Content Include="Views\Account\RegisterRoles.cshtml" />
     <Content Include="Views\Shared\_AnotherSearchDate.cshtml" />
+    <Content Include="Views\Pet\AdminPetList.cshtml" />
+    <Content Include="Views\Pet\AdminCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

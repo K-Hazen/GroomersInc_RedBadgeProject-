@@ -63,9 +63,11 @@
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
+                <li class="list-group-item">@Html.ActionLink("Create Customer", "Create", "Customer")</li>
+                <li class="list-group-item">@Html.ActionLink("See Cusomters", "AdminCustomerList", "Customer")</li>
+                <li class="list-group-item">@Html.ActionLink("Add Pet", "AdminCreate", "Pet")</li>
+                <li class="list-group-item">@Html.ActionLink("See Pets", "AdminPetList", "Pet")</li>
+
             </ul>
             <div class="card-body">
                 <a href="#" class="card-link">Card link</a>
@@ -82,9 +84,8 @@
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
+                <li class="list-group-item">@Html.ActionLink("Create Appointments", "Create", "Appointment")</li>
+                <li class="list-group-item">@Html.ActionLink("View/Edit/Delete Appointments", "Index", "Appointment")</li>
             </ul>
             <div class="card-body">
                 <a href="#" class="card-link">Card link</a>
@@ -101,9 +102,8 @@
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
+                <li class="list-group-item">@Html.ActionLink("Add Staff", "Create", "Employee")</li>
+                <li class="list-group-item">@Html.ActionLink("View/Update/Delete Staff", "Index", "Employee")</li>
             </ul>
             <div class="card-body">
                 <a href="#" class="card-link">Card link</a>

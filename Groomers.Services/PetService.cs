@@ -47,6 +47,26 @@ namespace Groomers.Services
             return _context.SaveChanges() == 1;
         }
 
+        public bool AdminCreatePet(PetCreate model)
+        {
+
+            var entity =
+                new Pet()
+                {
+                    Name = model.Name,
+                    SizeOfDog = model.SizeOfDog,
+                    IsHairLong = model.IsHairLong,
+                    SpecialRequest = model.SpecialRequest,
+                    Birthday = model.Birthday,
+                    DateAdded = DateTimeOffset.Now,
+                    PersonID = model.PersonID,
+                };
+
+            _context.Pets.Add(entity);
+
+            return _context.SaveChanges() == 1;
+        }
+
         public IEnumerable<PetListItem> GetPets()
         {
             var entityList = _context.Pets.ToList();
@@ -63,7 +83,7 @@ namespace Groomers.Services
                             IsHairLong = e.IsHairLong,
                             SpecialRequest = e.SpecialRequest,
                             DateAdded= e.DateAdded,
-                            PersonID = e.PersonID,
+                            OwnerName = e.Person.FullName,
                         }).ToList(); 
 
             return (petList);
@@ -89,7 +109,7 @@ namespace Groomers.Services
                             IsHairLong = e.IsHairLong,
                             SpecialRequest = e.SpecialRequest,
                             DateAdded = e.DateAdded,
-                            PersonID = e.PersonID,
+                            //PersonID = e.PersonID,
                         }).ToList();
 
             return (petList);

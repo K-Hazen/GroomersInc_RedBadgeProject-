@@ -66,7 +66,7 @@ namespace Groomers.Models
     {
         public int PersonID { get; set; }
 
-        [Display(Name = "First Name")]
+        [Display(Name = "EmployeeID")]
         [DisplayFormat(ApplyFormatInEditMode = true)]
         public int EmployeeID { get; set; }
 

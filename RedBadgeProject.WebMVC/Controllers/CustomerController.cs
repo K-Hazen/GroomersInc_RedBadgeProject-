@@ -23,7 +23,7 @@ namespace RedBadgeProject.WebMVC.Controllers
         public ActionResult Index()
         {
             var service = CreateCustomerService();
-            var model = service.GetCustomers();
+            var model = service.GetCustomerByCurrentUserId();
             return View(model);
         }
 
@@ -53,7 +53,17 @@ namespace RedBadgeProject.WebMVC.Controllers
             if (service.CreateCustomer(model))
             {
                 TempData["SaveResult"] = "Your profile was created.";
-                return RedirectToAction("UserIndex", "Users");
+
+
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("AdminCustomerList", "Customer");
+
+                }
+                else
+                {
+                    return RedirectToAction("UserIndex", "Users");
+                }
             }
 
             ModelState.AddModelError("", "Your profile could not be created");
@@ -112,7 +122,17 @@ namespace RedBadgeProject.WebMVC.Controllers
             if (service.UpdateCustomer(model))
             {
                 TempData["SaveResult"] = "Your profile has been updated.";
-                return RedirectToAction("UserIndex", "Users");
+
+
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("AdminCustomerList", "Customer");
+
+                }
+                else
+                {
+                    return RedirectToAction("Details", "Customer", new { id = model.PersonID });
+                }
             }
 
             ModelState.AddModelError("", "Your profile could not be updated.");
@@ -140,7 +160,15 @@ namespace RedBadgeProject.WebMVC.Controllers
 
             TempData["SaveResult"] = "Your profile was deleted";
 
-            return RedirectToAction("Index");
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("AdminCustomerList", "Customer");
+
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
             
 
