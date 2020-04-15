@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Welcome Customers!";
+    ViewBag.Title = "Admin Home Page";
 }
 
 @if (TempData.ContainsKey("SaveResult"))
@@ -38,6 +38,18 @@
         height: 15vw;
         object-fit: cover;
     }
+
+    #customerIcon{
+        width: 90%;
+        height: auto;
+        align-content: center;
+        margin-left: 1em;
+        margin-top: .75em;
+    }
+
+    .card-title, .card-text{
+        padding: 8px 8px 8px 8px;
+    }
 </style>
 
 
@@ -68,7 +80,7 @@
     <div class="col-sm-3">
 
         <div class="card" style="width: 24rem;">
-            <img class="card-img-top" src="~/Content/Images/customer.png" alt="Customer">
+            <img class="card-img-top text-center" src="~/Content/Images/customerIcon.png" id="customerIcon" alt="Customer">
             <div class="card-body">
                 <h4 class="card-title">Manage Customers</h4>
                 <p class="card-text">Manage all customer information, including pets associated with their account.</p>
