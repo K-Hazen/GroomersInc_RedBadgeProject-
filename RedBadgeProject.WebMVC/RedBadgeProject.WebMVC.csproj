@@ -236,7 +236,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Views\Users\AuthorizeFailed.cshtml" />
-    <None Include="Properties\PublishProfiles\GroomersIncTest1 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\GrommersIncProject - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -399,6 +399,8 @@
     <Content Include="Views\Pet\AdminPetList.cshtml" />
     <Content Include="Views\Pet\AdminCreate.cshtml" />
     <Content Include="Views\Customer\AdminEdit.cshtml" />
+    <Content Include="Views\Appointment\AdminBookAppointment.cshtml" />
+    <Content Include="Views\Shared\_AdminIndexSearchDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

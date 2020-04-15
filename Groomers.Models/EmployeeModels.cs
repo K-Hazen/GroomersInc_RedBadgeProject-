@@ -144,6 +144,7 @@ namespace Groomers.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name = "Hire Date")]
         public DateTimeOffset HireDate { get; set; }
 
         public ICollection<Pet> Pets { get; set; }
@@ -156,6 +157,11 @@ namespace Groomers.Models
 
         [Display(Name = "Employee Number")]
         public int EmployeeID { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+        [Display(Name = "Hire Date")]
+        public DateTimeOffset HireDate { get; set; }
 
         [Display(Name = "First Name")]
         public string FirstName { get; set; }

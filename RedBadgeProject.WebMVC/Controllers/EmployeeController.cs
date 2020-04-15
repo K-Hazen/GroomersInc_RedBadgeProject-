@@ -74,6 +74,7 @@ namespace RedBadgeProject.WebMVC.Controllers
                 {
                     PersonID = detail.PersonID,
                     EmployeeID = detail.EmployeeID,
+                    HireDate = detail.HireDate,
                     FirstName = detail.FirstName,
                     LastName = detail.LastName,
                     JobTitle = detail.JobTitle,

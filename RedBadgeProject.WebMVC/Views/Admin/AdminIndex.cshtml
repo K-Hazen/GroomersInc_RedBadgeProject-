@@ -105,6 +105,7 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">@Html.ActionLink("Create Appointments", "Create", "Appointment")</li>
                 <li class="list-group-item">@Html.ActionLink("View/Edit/Delete", "Index", "Appointment")</li>
+                <li class="list-group-item">@Html.Partial("_AdminIndexSearchDate", new Groomers.Models.SearchDatePV())</li>
             </ul>
         </div>
     </div>

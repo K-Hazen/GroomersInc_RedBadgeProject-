@@ -123,9 +123,6 @@ namespace RedBadgeProject.WebMVC.Controllers
         }
        
         
-        //the method for the customer, whereas we would create a less strict method for the admin to manually input the Person ID
-       
-        
         [ActionName("BookAppointment")]
         public ActionResult BookAppointment(int id/*, Guid userID*/)
         {
@@ -174,6 +171,69 @@ namespace RedBadgeProject.WebMVC.Controllers
                // return RedirectToAction("Index", "Customer");
 
                return RedirectToAction("Details", "Customer", new { id = model.PersonID });
+            }
+
+            ModelState.AddModelError("", "Your selection is already booked. Please pick another option.");
+            return View(model);
+        }
+
+
+
+        [ActionName("AdminBookAppointment")]
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Appointment/AdminBookAppointment")]
+        public ActionResult AdminBookAppointment(int id)
+        {
+            //// customer service
+            //var customerService = CreateCustomerService(); ;
+
+            //// get currentUser's Customer
+            //var customerDetail = customerService.GetCustomerByCurrentUserId();
+
+
+            var service = CreateAppointmentService();
+            var detail = service.GetAppointmentById(id);
+            var model =
+                new AppointmentBook
+                {
+                    AppointmentID = detail.AppointmentID,
+                    AppointmentDate = detail.AppointmentDate,
+                    StartTime = detail.StartTime,
+                    IsAvailable = detail.IsAvailable,
+                    //PersonID = customerDetail.PersonID// call current user's ID
+                };
+
+            ViewBag.PetID = new SelectList(_dB.Pets, "PetID", "Name");
+            ViewBag.PersonID = new SelectList(_dB.People, "PersonID", "FullName");
+            return View(model);
+
+        }
+
+        [ActionName("AdminBookAppointment")]
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Appointment/AdminBookAppointment")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdminBookAppointment(int id, AppointmentBook model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.AppointmentID != id)
+            {
+                ModelState.AddModelError("", "Date is not valid.");
+                return View(model);
+            }
+
+            var service = CreateAppointmentService();
+
+            if (service.BookAppointment(model))
+            {
+                TempData["SaveResult"] = "Your appointment has been booked.";
+                // return RedirectToAction("Index", "Customer");
+
+                //return RedirectToAction("Details", "Customer", new { id = model.PersonID });
+
+                return RedirectToAction("AdminCustomerList", "Customer");
             }
 
             ModelState.AddModelError("", "Your selection is already booked. Please pick another option.");

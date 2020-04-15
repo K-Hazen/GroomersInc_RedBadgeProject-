@@ -53,7 +53,15 @@
             <td>
                 @if (item.IsAvailable == true)
                 {
-                    @Html.ActionLink("Book", "BookAppointment", new { id = item.AppointmentID })
+                    if (User.IsInRole("Admin"))
+                    {
+                     @Html.ActionLink("Book", "AdminBookAppointment", new { id = item.AppointmentID })
+                    }
+                    else
+                    {
+
+                        @Html.ActionLink("Book", "BookAppointment", new { id = item.AppointmentID })
+                    }
                 }
                 else
                 {<p>Not Available</p>}
