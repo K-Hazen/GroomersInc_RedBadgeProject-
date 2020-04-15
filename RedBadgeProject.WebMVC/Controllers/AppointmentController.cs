@@ -179,7 +179,7 @@ namespace RedBadgeProject.WebMVC.Controllers
 
 
 
-        [ActionName("BookAppointment")]
+        [ActionName("AdminBookAppointment")]
         [Authorize(Roles = "Admin")]
         [Route("Admin/Appointment/AdminBookAppointment")]
         public ActionResult AdminBookAppointment(int id)
@@ -209,7 +209,7 @@ namespace RedBadgeProject.WebMVC.Controllers
 
         }
 
-        [ActionName("BookAppointment")]
+        [ActionName("AdminBookAppointment")]
         [Authorize(Roles = "Admin")]
         [Route("Admin/Appointment/AdminBookAppointment")]
         [HttpPost]

@@ -399,6 +399,8 @@
     <Content Include="Views\Pet\AdminPetList.cshtml" />
     <Content Include="Views\Pet\AdminCreate.cshtml" />
     <Content Include="Views\Customer\AdminEdit.cshtml" />
+    <Content Include="Views\Appointment\AdminBookAppointment.cshtml" />
+    <Content Include="Views\Shared\_AdminIndexSearchDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

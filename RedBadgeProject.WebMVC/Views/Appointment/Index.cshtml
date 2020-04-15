@@ -20,6 +20,20 @@
 <p>
     @Html.ActionLink("Create New Appointments", "Create")
 </p>
+
+
+<div>
+    <table class="table-responsive" id="BookingTable" align="right">
+        <thead>
+            <tr>
+                <th scope="col"> <h3>Book</h3></th>
+                <th scope="col">@Html.Partial("_AnotherSearchDate", new Groomers.Models.SearchDatePV())</th>
+
+            </tr>
+        </thead>
+    </table>
+</div>
+
 <table class="table table-hover">
     <tr>
         <th>
