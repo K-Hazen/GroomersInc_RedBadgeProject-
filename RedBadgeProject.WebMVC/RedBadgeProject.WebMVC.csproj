@@ -211,6 +211,7 @@
     <Content Include="Content\Images\puppyTowel.jpg" />
     <Content Include="Content\Images\securtiy.jpg" />
     <Content Include="Content\Images\shower.jpg" />
+    <Content Include="Content\Images\you-shall-not-pass.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

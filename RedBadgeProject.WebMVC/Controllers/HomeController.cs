@@ -10,7 +10,12 @@ namespace RedBadgeProject.WebMVC.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole("User"))
+                return RedirectToAction("UserIndex", "Users");
+            else if (User.IsInRole("Admin"))
+                return RedirectToAction("AdminIndex", "Admin");
+            else
+                return View();
         }
 
         public ActionResult About()

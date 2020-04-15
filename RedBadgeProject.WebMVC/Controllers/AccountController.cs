@@ -87,13 +87,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    if (User.IsInRole("User"))
-                        return RedirectToAction("UserIndex", "Users");
-                    else if (User.IsInRole("Admin"))
-                        return RedirectToAction("AdminIndex", "Admin");
-                    else
-                        return RedirectToLocal(returnUrl);
-                    
+                        return RedirectToLocal(returnUrl);   
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
