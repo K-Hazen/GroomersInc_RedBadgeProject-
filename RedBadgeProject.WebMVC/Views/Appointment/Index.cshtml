@@ -4,6 +4,12 @@
     ViewBag.Title = "List of Appointments";
 }
 
+<style>
+    #bookingBar {
+        padding: 0px 8px 0px 8px;
+    }
+</style>
+
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success fade in" role="alert">
@@ -15,24 +21,25 @@
     </div>
 }
 
-<h2>Appointments On Display For Booking</h2>
-
-<p>
-    @Html.ActionLink("Create New Appointments", "Create")
-</p>
-
-
-<div>
+<div class="bookingDiv">
     <table class="table-responsive" id="BookingTable" align="right">
         <thead>
-            <tr>
-                <th scope="col"> <h3>Book</h3></th>
+            <tr >
+                <th id="bookingBar" scope="col"> <p>Book An App</p></th>
                 <th scope="col">@Html.Partial("_AnotherSearchDate", new Groomers.Models.SearchDatePV())</th>
 
             </tr>
         </thead>
     </table>
 </div>
+
+<h2>Appointments on Schedule</h2>
+
+<p>
+    @Html.ActionLink("Create New Appointments", "Create")
+</p>
+
+
 
 <table class="table table-hover">
     <tr>
