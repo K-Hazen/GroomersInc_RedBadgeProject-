@@ -1,17 +1,97 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+
+    <style>
+    #messageMe{
+    margin-top: .90em;
+}
+
+#nameLabel{
+    padding-right: 20px;
+}
+
+#emailLabel{
+    padding-right: 26px;
+}
+
+#name, #email{
+    padding-right: 1em;
+    width: 400px;
+
+}
+@@media (max-width: 978px)
+{
+    #name, #email, textarea
+    {
+        width: 300px;
+    }
+}
+
+#message{
+    padding-right: 0em;
+    padding-bottom: 5em;
+}
+
+#buttonDiv{
+    text-align: left;
+    width: auto;
+
+}
+#submitButton{
+    color: black;
+    font-weight: bold;
+    padding-right: 80px;
+    padding-left: 80px;
+}
+
+    </style>
+
+<h2>Contact Us!</h2>
+
 
 <address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
+    101 Groomers Inc. Rd Microsoft Way<br />
+    Indianapolis, IN 46224<br />
     <abbr title="Phone">P:</abbr>
-    425.555.0100
+    111.222.3333
 </address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" id="contactColumnOne">
+            <div id="messageMeBox">
+                <div style="text-align: left">
+                    <h4 id="messageMeHeader">Send Us A Message</h4>
+                </div>
+                <div id="formDiv">
+                    <form>
+                        <label for="name" id="nameLabel">Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Your name...">
+                        <br />
+                        <br />
+                        <label for="email" id="emailLabel">Email:</label>
+                        <input type="text" name="_replyto" id="email" placeholder="Your email address...">
+                        <br />
+                        <br />
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" rows="2" cols="46" placeholder="Your message..."></textarea>
+                        <br />
+                        <br />
+                     </form>
+                </div>
+                <div id="buttonDiv"><input type="submit" value="Send" id="submitButton"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br/>
+<br/>
+
+<div>
+    <address>
+        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    </address>
+</div>

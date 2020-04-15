@@ -1,7 +1,62 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "About Us";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<style>
+
+    #mainPic {
+        max-width: 100%;
+        height: auto;
+    }
+
+    #mainPic2 {
+        max-width: 65%;
+        height: auto;
+        /*transform: rotate(-90deg);*/
+     
+   
+    }
+
+    #row2{
+        margin-top: 5em;
+    }
+    
+
+    .row.display-flex {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+        .row.display-flex > [class*='col-'] {
+            display: flex;
+            flex-direction: column;
+        }
+</style>
+<h2>About Us</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <img src="~/Content/Images/grooming.jpg" class="img-fluid" id="mainPic" alt="Groomers Inc">
+        </div>
+        <div class="col-md-5">
+            <p>We have been serving the central Indiana area for over 40 years! We are proud to be a family owned buisness now on it's second gernation of ownership!</p>
+            <p>Our staff is the best! Not only are they amazing groomers and stylist, but they love your pets like they were their own.</p>
+            <p>We hope to meet you soon!</p>
+        </div>
+    </div>
+
+    <div class="row" id="row2">
+        <div class="col-md-5">
+            <p>When we say "spa" we mean spa! All dogs in our care are treated to a relaxing environment. Pet massages and cucumber water are regular occurances at Groomers Inc.</p>
+            <p>Our hope is that your dog walks away not only clean but with an experience that refreshes and rejuvenates!</p>
+            <p>We can't wait to meet your favorite family member :)</p> 
+        </div>
+        <div class="col-md-5"> 
+            <img src="~/Content/Images/dogonTowel_edit.jpg" class="img-fluid" id="mainPic2" alt="Groomers Inc">
+        </div>
+    </div>
+
+</div>
+
+
