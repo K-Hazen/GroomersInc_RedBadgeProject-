@@ -106,6 +106,7 @@ namespace Groomers.Services
 
                 entity.PersonID = model.PersonID;
                 entity.EmployeeID = model.EmployeeID;
+                entity.HireDate = model.HireDate; 
                 entity.FirstName = model.FirstName;
                 entity.LastName = model.LastName;
                 entity.JobTitle = model.JobTitle;

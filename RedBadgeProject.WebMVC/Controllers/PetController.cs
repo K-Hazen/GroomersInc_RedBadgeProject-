@@ -16,13 +16,6 @@ namespace RedBadgeProject.WebMVC.Controllers
     {
         private ApplicationDbContext _dB = new ApplicationDbContext();
 
-        // GET: Pet (View = ListItem)
-        //public ActionResult Index() ---> May still need this for admin role
-        //{
-        //    var service = CreatePetService();
-        //    var model = service.GetPets(); 
-        //    return View(model);
-        //}
 
         public ActionResult Index()
         {
