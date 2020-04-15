@@ -66,8 +66,8 @@
                 @Html.DisplayFor(modelItem => item.ProfileModifiedDate)
             </td>
             <td>
+                @Html.ActionLink("Profile", "Details", new { id = item.PersonID }) |
                 @Html.ActionLink("Edit", "AdminEdit", new { id = item.PersonID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PersonID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.PersonID })
             </td>
         </tr>

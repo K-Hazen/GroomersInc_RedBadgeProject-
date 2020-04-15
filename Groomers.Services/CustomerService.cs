@@ -135,6 +135,7 @@ namespace Groomers.Services
         }
 
         public CustomerHomePage GetCustomerHomePage()
+        
         {
             var entity = _context.Customers.Single(e => e.UserID == _userID);
 
