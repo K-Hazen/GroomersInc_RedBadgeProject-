@@ -44,7 +44,7 @@ namespace Groomers.Services
                         AppointmentDate = model.AppointmentDate,
                         StartTime = model.StartTime,
                         EndTime = model.EndTime,
-                        IsAvailable = model.IsAvailable,
+                        IsAvailable = true,
                     };
 
                 _context.Appointments.Add(entityClone);

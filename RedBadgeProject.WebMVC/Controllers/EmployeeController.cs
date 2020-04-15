@@ -76,6 +76,7 @@ namespace RedBadgeProject.WebMVC.Controllers
                     EmployeeID = detail.EmployeeID,
                     FirstName = detail.FirstName,
                     LastName = detail.LastName,
+                    JobTitle = detail.JobTitle,
                     StreetAddress = detail.StreetAddress,
                     City = detail.City,
                     State = detail.State,
@@ -85,7 +86,6 @@ namespace RedBadgeProject.WebMVC.Controllers
                     TerminationDate = detail.TerminationDate,
                 };
 
-            ViewBag.EmployeeID = new SelectList(_dB.Appointments, "EmployeeID", "EmployeeID", model.EmployeeID);
             return View(model);
         }
 

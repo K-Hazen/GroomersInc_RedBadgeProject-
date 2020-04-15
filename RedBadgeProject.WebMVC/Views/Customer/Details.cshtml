@@ -215,5 +215,14 @@
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PersonID }) |
-    @Html.ActionLink("Back to Home", "UserIndex", "Users")
+
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Back to Home", "AdminCustomerList", "Customer")
+
+    }
+    else if (User.IsInRole("User"))
+    {
+        @Html.ActionLink("Back to Home", "UserIndex", "Users")
+    }
 </p>

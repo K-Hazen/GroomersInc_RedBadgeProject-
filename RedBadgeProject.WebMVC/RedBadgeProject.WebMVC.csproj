@@ -397,6 +397,7 @@
     <Content Include="Views\Shared\_AnotherSearchDate.cshtml" />
     <Content Include="Views\Pet\AdminPetList.cshtml" />
     <Content Include="Views\Pet\AdminCreate.cshtml" />
+    <Content Include="Views\Customer\AdminEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

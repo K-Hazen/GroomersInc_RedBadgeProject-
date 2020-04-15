@@ -139,6 +139,68 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
+        //AdminEdit
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Customer/AdminEdit")]
+        public ActionResult AdminEdit(int id)
+        {
+            var service = CreateCustomerService();
+            var detail = service.GetCustomerById(id);
+            var model =
+                new CustomerEdit
+                {
+                    PersonID = detail.PersonID,
+                    FirstName = detail.FirstName,
+                    LastName = detail.LastName,
+                    StreetAddress = detail.StreetAddress,
+                    City = detail.City,
+                    State = detail.State,
+                    ZipCode = detail.ZipCode,
+                    PhoneNumber = detail.PhoneNumber,
+                    Email = detail.Email,
+                };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Customer/AdminEdit")]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult AdminEdit(int id, CustomerEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.PersonID != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var service = CreateCustomerService();
+
+            if (service.AdminUpdateCustomer(model))
+            {
+                TempData["SaveResult"] = "Your profile has been updated.";
+
+
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("AdminCustomerList", "Customer");
+
+                }
+                else
+                {
+                    return RedirectToAction("Details", "Customer", new { id = model.PersonID });
+                }
+            }
+
+            ModelState.AddModelError("", "Your profile could not be updated.");
+            return View(model);
+        }
+
         [ActionName("Delete")]
 
         public ActionResult Delete(int id)

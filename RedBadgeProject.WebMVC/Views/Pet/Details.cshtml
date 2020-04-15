@@ -176,5 +176,15 @@
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PetID }) |
-    @Html.ActionLink("Back to List", "Index")
+
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Back to List", "AdminPetList", "Pet")
+
+    }
+    else if (User.IsInRole("User"))
+    {
+        @Html.ActionLink("Back to List", "UserIndex", "Users")
+    }
+
 </p>

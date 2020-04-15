@@ -225,6 +225,30 @@ namespace Groomers.Services
             }
         }
 
+        public bool AdminUpdateCustomer(CustomerEdit model)
+        {
+            using (_context)
+            {
+                var entity =
+                      _context
+                      .Customers
+                      .Single(e => e.PersonID == model.PersonID);
+
+                entity.PersonID = model.PersonID;
+                entity.FirstName = model.FirstName;
+                entity.LastName = model.LastName;
+                entity.StreetAddress = model.StreetAddress;
+                entity.City = model.City;
+                entity.State = model.State;
+                entity.ZipCode = model.ZipCode;
+                entity.PhoneNumber = model.PhoneNumber;
+                entity.Email = model.Email;
+                entity.ProfileModifiedDate = DateTimeOffset.Now;
+
+                return _context.SaveChanges() == 1;
+            }
+        }
+
         public bool DeleteCustomer(int id)
         {
             using (_context)
