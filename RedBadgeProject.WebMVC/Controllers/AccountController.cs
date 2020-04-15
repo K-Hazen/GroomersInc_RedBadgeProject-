@@ -83,16 +83,11 @@ namespace RedBadgeProject.WebMVC.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+
             switch (result)
             {
                 case SignInStatus.Success:
-                    if (User.IsInRole("User"))
-                        return RedirectToAction("UserIndex", "Users");
-                    else if (User.IsInRole("Admin"))
-                        return RedirectToAction("AdminIndex", "Admin");
-                    else
-                        return RedirectToLocal(returnUrl);
-                    
+                        return RedirectToLocal(returnUrl);   
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -176,9 +171,9 @@ namespace RedBadgeProject.WebMVC.Controllers
                     //Assign role to user 
                     await UserManager.AddToRoleAsync(user.Id, model.UserRole);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AdminIndex", "Admin");
                 }
-                //  ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin")).ToList(), "Name", "Name");
+             
 
                 AddErrors(result);
             }

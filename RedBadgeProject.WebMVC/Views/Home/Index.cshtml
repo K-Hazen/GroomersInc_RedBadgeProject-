@@ -1,22 +1,51 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<style>
+    .col-md-4 {
+        background-color: #31708E;
+        border-radius: 15px 15px 15px 15px;
+        color: white;
+    }
+
+    #colOne {
+        border-right: 5px solid #F7F9FB;
+    }
+
+    .jumbotron {
+        background-image: url(content/images/lionmain.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: black;
+    }
+
+    .row.display-flex {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+        .row.display-flex > [class*='col-'] {
+            display: flex;
+            flex-direction: column;
+        }
+</style>
 
 <div class="jumbotron">
     <h1>Groomers Inc.</h1>
-    <p class="lead">Indiana's premiere dog spa.</p>
-    <p><a href="" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <p class="lead">Indiana's premiere fake dog spa.</p>
+    <p><a href="" class="btn btn-primary btn-lg" id="button">Learn more &raquo;</a></p>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
+<div class="row display-flex">
+    <div class="col-md-4" id="colOne">
         <h2>Customer Register</h2>
         <p>
             If you are new to our online scheduler. Please register to gain access!
         </p>
-        <p><a class="btn btn-default" href= @Url.Action("Register","Account")>Register &raquo;</a></p>
+        <p><a class="btn btn-default" href=@Url.Action("Register","Account")>Register &raquo;</a></p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" id="colOne">
         <h2>Customer Login</h2>
         <p>If you already are one of our lovely customers log in here. It's great to have you back!</p>
         <p><a class="btn btn-default" href=@Url.Action("UserIndex","Users")>Log in &raquo;</a></p>
@@ -24,6 +53,7 @@
     <div class="col-md-4">
         <h2>Employee/Admin Login</h2>
         <p>Restricted to staff members only</p>
+        <br />
         <p><a class="btn btn-default" href=@Url.Action("AdminIndex","Admin")>Log in &raquo;</a></p>
     </div>
 </div>

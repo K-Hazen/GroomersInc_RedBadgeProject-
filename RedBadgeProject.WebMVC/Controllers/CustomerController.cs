@@ -23,7 +23,7 @@ namespace RedBadgeProject.WebMVC.Controllers
         public ActionResult Index()
         {
             var service = CreateCustomerService();
-            var model = service.GetCustomers();
+            var model = service.GetCustomerByCurrentUserId();
             return View(model);
         }
 
@@ -53,7 +53,17 @@ namespace RedBadgeProject.WebMVC.Controllers
             if (service.CreateCustomer(model))
             {
                 TempData["SaveResult"] = "Your profile was created.";
-                return RedirectToAction("UserIndex", "Users");
+
+
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("AdminCustomerList", "Customer");
+
+                }
+                else
+                {
+                    return RedirectToAction("UserIndex", "Users");
+                }
             }
 
             ModelState.AddModelError("", "Your profile could not be created");
@@ -61,7 +71,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
-      
+
         public ActionResult Details(int id)
         {
             var service = CreateCustomerService();
@@ -71,7 +81,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
-      
+
         public ActionResult Edit(int id)
         {
             var service = CreateCustomerService();
@@ -90,10 +100,10 @@ namespace RedBadgeProject.WebMVC.Controllers
                     Email = detail.Email,
                 };
 
-            return View(model); 
+            return View(model);
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
 
@@ -112,11 +122,83 @@ namespace RedBadgeProject.WebMVC.Controllers
             if (service.UpdateCustomer(model))
             {
                 TempData["SaveResult"] = "Your profile has been updated.";
-                return RedirectToAction("UserIndex", "Users");
+
+
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("AdminCustomerList", "Customer");
+
+                }
+                else
+                {
+                    return RedirectToAction("Details", "Customer", new { id = model.PersonID });
+                }
             }
 
             ModelState.AddModelError("", "Your profile could not be updated.");
-            return View(model); 
+            return View(model);
+        }
+
+        //AdminEdit
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Customer/AdminEdit")]
+        public ActionResult AdminEdit(int id)
+        {
+            var service = CreateCustomerService();
+            var detail = service.GetCustomerById(id);
+            var model =
+                new CustomerEdit
+                {
+                    PersonID = detail.PersonID,
+                    FirstName = detail.FirstName,
+                    LastName = detail.LastName,
+                    StreetAddress = detail.StreetAddress,
+                    City = detail.City,
+                    State = detail.State,
+                    ZipCode = detail.ZipCode,
+                    PhoneNumber = detail.PhoneNumber,
+                    Email = detail.Email,
+                };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Customer/AdminEdit")]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult AdminEdit(int id, CustomerEdit model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            if (model.PersonID != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch");
+                return View(model);
+            }
+
+            var service = CreateCustomerService();
+
+            if (service.AdminUpdateCustomer(model))
+            {
+                TempData["SaveResult"] = "Your profile has been updated.";
+
+
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("AdminCustomerList", "Customer");
+
+                }
+                else
+                {
+                    return RedirectToAction("Details", "Customer", new { id = model.PersonID });
+                }
+            }
+
+            ModelState.AddModelError("", "Your profile could not be updated.");
+            return View(model);
         }
 
         [ActionName("Delete")]
@@ -140,9 +222,17 @@ namespace RedBadgeProject.WebMVC.Controllers
 
             TempData["SaveResult"] = "Your profile was deleted";
 
-            return RedirectToAction("Index");
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("AdminCustomerList", "Customer");
+
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
-            
+
 
         //helper method
         private CustomerService CreateCustomerService()

@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Groomers Inc.</title>
@@ -9,6 +10,8 @@
 
 </head>
 <body>
+<style></style>
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -37,7 +40,7 @@
 
                     @if (User.IsInRole("Admin"))
                     {
-                        <li>@Html.ActionLink("Home", "AmdinIndex", "Index")</li>
+                        <li>@Html.ActionLink("Home", "AdminIndex", "Admin")</li>
 
                     }
                     else if (User.IsInRole("User"))
@@ -49,18 +52,38 @@
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     }
 
-                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
-                    @*<li>@Html.ActionLink("Manage Roles", "Index", "Role") </li>*@
-
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Customer", "Index", "Customer")</li>
-                        <li>@Html.ActionLink("Pet", "Index", "Pet")</li>
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Customer", "AdminCustomerList", "Customer")</li>
+
+                        }
+                        else if (User.IsInRole("User"))
+                        {
+                            <li>@Html.ActionLink("Customer", "Index", "Customer")</li>
+                        }
+
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li>@Html.ActionLink("Pet", "AdminPetList", "Pet")</li>
+
+                        }
+                        else if (User.IsInRole("User"))
+                        {
+                            <li>@Html.ActionLink("Pet", "Index", "Pet")</li>
+                        }
 
                         if (User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Employee", "Index", "Employee")</li>
                             <li>@Html.ActionLink("Appointment", "Index", "Appointment")</li>
+                        }
+
+                        if (User.IsInRole("User"))
+                        {
+                            <li>@Html.ActionLink("Book Appointment", "UserIndex", "Users")</li>
+                        
                         }
 
                     }

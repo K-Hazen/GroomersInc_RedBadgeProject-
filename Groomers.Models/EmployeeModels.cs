@@ -66,7 +66,7 @@ namespace Groomers.Models
     {
         public int PersonID { get; set; }
 
-        [Display(Name = "First Name")]
+        [Display(Name = "EmployeeID")]
         [DisplayFormat(ApplyFormatInEditMode = true)]
         public int EmployeeID { get; set; }
 
@@ -78,7 +78,11 @@ namespace Groomers.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+       
+        [Display(Name = "Job Title")]
+        public string JobTitle { get; set; }
 
+      
         [Display(Name = "Address")]
         public string StreetAddress { get; set; }
 
@@ -130,6 +134,10 @@ namespace Groomers.Models
         [DisplayFormat(DataFormatString = "{0:(###) ###-####}")]
         public long PhoneNumber { get; set; }
 
+       
+        [Display(Name = "Job Title")]
+        public string JobTitle { get; set; }
+
 
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
@@ -155,6 +163,10 @@ namespace Groomers.Models
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+
+        [Display(Name = "Job Title")]
+        public string JobTitle { get; set; }
 
 
         [Display(Name = "Address")]

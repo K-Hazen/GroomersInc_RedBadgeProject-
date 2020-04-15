@@ -2,30 +2,47 @@
 @{
     ViewBag.Title = "Manage Role";
 }
-<h2>Manage Role</h2>
-<table><tr><td style="height:20px;"></td></tr></table>
-<table id="tbrole" style="width:30%; border:solid 4px red; background-color:skyblue; padding-left:10px;">
-    <tr>
-        <td style="background:green; color:white; padding:10px;">
-            Role Name
-        </td>
-    </tr>
-    @foreach (var item in Model)
-    {
+
+<style>
+    #linkHome {
+        margin-top: 3em;
+    }
+
+    .wrapper{
+        margin-left: 5em;
+    }
+</style>
+
+<div class="wrapper">
+    <h2>Manage Role</h2>
+    <table ><tr><td style="height:20px;"></td></tr></table>
+    <table class="tabel table-responsive" id="tbrole" style="width:30%; border:solid 4px #687864; background-color:#8FC1E3; padding-left:10px;">
         <tr>
-            <td style="padding:10px; border-bottom:1px solid #ff006e;">
-                @item.Name
+            <td style="background:#31708E; color:white; padding:10px;">
+                Roles Available
             </td>
         </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="padding:10px; border-bottom:2px solid #687864; font-weight: bold;">
+                    @item.Name
+                </td>
+            </tr>
 
-    }
-</table>
-<table>
-    <tr><td style="height:20px;"></td></tr>
-    <tr>
-        <td style="height:20px; text-align:right;">
-            @Html.ActionLink("Add New Role", "Create", "Role")
-        </td>
-    </tr>
-</table>
+        }
+    </table>
+    <table>
+        <tr><td style="height:20px;"></td></tr>
+        <tr>
+            <td style="height:20px; text-align:right; font-size: 20px;">
+                @Html.ActionLink(">>Add New Role<<", "Create", "Role")
+            </td>
+        </tr>
+    </table>
+
+    <p id="linkHome">
+        @Html.ActionLink("Return Home", "AdminIndex", "Admin")
+    </p>
+</div>
 

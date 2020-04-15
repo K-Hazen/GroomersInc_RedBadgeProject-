@@ -99,7 +99,8 @@ namespace Groomers.Models
         [Display(Name = "Pet Added On")]
         public DateTimeOffset DateAdded { get; set; }
 
-        public int PersonID { get; set; }
+        [Display(Name = "Owner")]
+        public string OwnerName { get; set; }
     }
 
     public class PetEdit

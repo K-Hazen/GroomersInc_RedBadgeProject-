@@ -41,11 +41,14 @@ namespace RedBadgeProject.WebMVC.Controllers
         //Create a New role
         //<param name = "Role"> </param>
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Role/Create")]
         public ActionResult Create(IdentityRole role)
         {
             context.Roles.Add(role);
             context.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["SaveResult"] = "Your role was created.";
+            return RedirectToAction("AdminIndex", "Admin");
         }
     }
 }

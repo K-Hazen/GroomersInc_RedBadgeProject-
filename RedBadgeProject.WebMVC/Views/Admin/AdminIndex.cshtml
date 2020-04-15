@@ -1,45 +1,71 @@
 ﻿@{
-    ViewBag.Title = "Welcome Customers!";
+    ViewBag.Title = "Admin Home Page";
 }
 
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
+
+<style>
+
+    body {
+        background-color: #31708e;
+    }
+
+    .jumbotron {
+        background-image: url(content/images/dog_shampoo2.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: black;
+        height: 25em;
+    }
+
+    .card {
+        background-color: #F7F9FB;
+        /*border-radius: 30px 15px 15px 15px;*/
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+    }
+
+    #customerIcon{
+        width: 90%;
+        height: auto;
+        align-content: center;
+        margin-left: 1em;
+        margin-top: .75em;
+    }
+
+    .card-title, .card-text{
+        padding: 8px 8px 8px 8px;
+    }
+</style>
 
 
 <div class="jumbotron">
-    <h1>Admin Page...whoop whoop</h1>
-    <p class="lead">Admin Page is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <h1>Staff Page</h1>
+    <p class="lead">Manage all your behind the scenes needs.</p>
 </div>
 
-@*<div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </div>
-    </div>*@
-
 <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-3 d-flex align-items-stretch">
 
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card" style="width: 24rem;">
+            <img class="card-img-top" src="~/Content/Images/securtiy.jpg" alt="Roles">
             <div class="card-body">
                 <h4 class="card-title">Manage Roles</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">View all roles available, create new roles, and assign users/employees to roles.</p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">@Html.ActionLink("View Roles", "Index", "Role")</li>
@@ -47,68 +73,53 @@
                 <li class="list-group-item">@Html.ActionLink("Register User", "RegisterRoles", "Account")</li>
 
             </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
+
         </div>
     </div>
 
     <div class="col-sm-3">
 
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card" style="width: 24rem;">
+            <img class="card-img-top text-center" src="~/Content/Images/customerIcon.png" id="customerIcon" alt="Customer">
             <div class="card-body">
                 <h4 class="card-title">Manage Customers</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Manage all customer information, including pets associated with their account.</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
+                <li class="list-group-item">@Html.ActionLink("Create Customer", "Create", "Customer")</li>
+                <li class="list-group-item">@Html.ActionLink("See Cusomters", "AdminCustomerList", "Customer")</li>
+                <li class="list-group-item">@Html.ActionLink("Add Pet", "AdminCreate", "Pet")</li>
+                <li class="list-group-item">@Html.ActionLink("See Pets", "AdminPetList", "Pet")</li>
+
             </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
         </div>
     </div>
 
     <div class="col-sm-3">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card" style="width: 24rem;">
+            <img class="card-img-top" src="~/Content/Images/calendar.jpg" alt="Calendar">
             <div class="card-body">
                 <h4 class="card-title">Manage Appointments</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Create and manage the appointments that are available for booking.</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
+                <li class="list-group-item">@Html.ActionLink("Create Appointments", "Create", "Appointment")</li>
+                <li class="list-group-item">@Html.ActionLink("View/Edit/Delete", "Index", "Appointment")</li>
             </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
         </div>
     </div>
 
     <div class="col-sm-3">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="card" style="width: 24rem;">
+            <img class="card-img-top" src="~/Content/Images/employee.jpg" alt="Staff">
             <div class="card-body">
                 <h4 class="card-title">Manage Staff</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Create and manage all employee information.</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Vestibulum at eros</li>
+                <li class="list-group-item">@Html.ActionLink("Add Staff", "Create", "Employee")</li>
+                <li class="list-group-item">@Html.ActionLink("View/Update/Delete", "Index", "Employee")</li>
             </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
         </div>
     </div>
 </div>

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Groomers.Models.EmployeeListItem>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Employee List";
 }
 
-<h2>Index</h2>
+<h2>Employee List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create A New Employee", "Create")
 </p>
 
 @if (TempData.ContainsKey("SaveResult"))
@@ -21,7 +21,7 @@
     </div>
 }
 
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PersonID)
@@ -31,6 +31,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobTitle)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PhoneNumber)
@@ -57,6 +60,9 @@
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
@@ -67,10 +73,14 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.PersonID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PersonID }) |
+                @Html.ActionLink("Profile", "Details", new { id = item.PersonID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.PersonID })
             </td>
         </tr>
     }
 
 </table>
+
+<p>
+    @Html.ActionLink("Back to Home", "AdminIndex", "Admin")
+</p>

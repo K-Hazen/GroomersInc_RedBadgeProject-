@@ -29,6 +29,7 @@ namespace Groomers.Services
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     EmployeeID = model.EmployeeID,
+                    JobTitle = model.JobTitle,
                     StreetAddress = model.StreetAddress,
                     City = model.City,
                     State = model.State,
@@ -56,6 +57,7 @@ namespace Groomers.Services
                         PersonID = e.PersonID,
                         EmployeeID = e.EmployeeID,
                         FullName = e.FullName,
+                        JobTitle = e.JobTitle,
                         PhoneNumber = e.PhoneNumber,
                         Email = e.Email,
                         HireDate = e.HireDate,
@@ -75,8 +77,10 @@ namespace Groomers.Services
             var model = new EmployeeDetail
             {
                 PersonID = entity.PersonID,
+                EmployeeID = entity.EmployeeID, 
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
+                JobTitle = entity.JobTitle,
                 StreetAddress = entity.StreetAddress,
                 City = entity.City,
                 State = entity.State,
@@ -86,7 +90,6 @@ namespace Groomers.Services
                 Pets = entity.Pets,
                 HireDate = entity.HireDate,
                 TerminationDate = entity.TerminationDate,
-                //appointments?
             };
 
             return (model);
@@ -105,6 +108,7 @@ namespace Groomers.Services
                 entity.EmployeeID = model.EmployeeID;
                 entity.FirstName = model.FirstName;
                 entity.LastName = model.LastName;
+                entity.JobTitle = model.JobTitle;
                 entity.StreetAddress = model.StreetAddress;
                 entity.City = model.City;
                 entity.State = model.State;

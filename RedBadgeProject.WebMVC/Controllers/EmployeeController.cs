@@ -34,7 +34,8 @@ namespace RedBadgeProject.WebMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Employee/Create")]
         public ActionResult Create(EmployeeCreate model)
         {
             if (!ModelState.IsValid) return View(model);
@@ -43,11 +44,11 @@ namespace RedBadgeProject.WebMVC.Controllers
 
             if (service.CreateEmployee(model))
             {
-                TempData["SaveResult"] = "Your profile was created.";
+                TempData["SaveResult"] = "The staff profile was created.";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Your profile could not be created");
+            ModelState.AddModelError("", "The staff profile could not be created");
 
             return View(model);
         }
@@ -75,6 +76,7 @@ namespace RedBadgeProject.WebMVC.Controllers
                     EmployeeID = detail.EmployeeID,
                     FirstName = detail.FirstName,
                     LastName = detail.LastName,
+                    JobTitle = detail.JobTitle,
                     StreetAddress = detail.StreetAddress,
                     City = detail.City,
                     State = detail.State,
@@ -84,11 +86,12 @@ namespace RedBadgeProject.WebMVC.Controllers
                     TerminationDate = detail.TerminationDate,
                 };
 
-            ViewBag.EmployeeID = new SelectList(_dB.Appointments, "EmployeeID", "EmployeeID", model.EmployeeID);
             return View(model);
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Employee/Edit")]
         [ValidateAntiForgeryToken]
 
         public ActionResult Edit(int id, EmployeeEdit model)
@@ -105,11 +108,11 @@ namespace RedBadgeProject.WebMVC.Controllers
 
             if (service.UpdateEmployee(model))
             {
-                TempData["SaveResult"] = "Your profile has been updated.";
+                TempData["SaveResult"] = "The staff profile has been updated.";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Your profile could not be updated.");
+            ModelState.AddModelError("", "The staff profile could not be updated.");
             return View(model);
         }
 
@@ -125,6 +128,8 @@ namespace RedBadgeProject.WebMVC.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Employee/Delete")]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeletePost(int id)

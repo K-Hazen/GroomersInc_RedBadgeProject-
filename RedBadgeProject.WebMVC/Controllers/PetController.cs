@@ -14,7 +14,7 @@ namespace RedBadgeProject.WebMVC.Controllers
     [Authorize]
     public class PetController : Controller
     {
-        private ApplicationDbContext _dB = new ApplicationDbContext(); 
+        private ApplicationDbContext _dB = new ApplicationDbContext();
 
         // GET: Pet (View = ListItem)
         //public ActionResult Index() ---> May still need this for admin role
@@ -30,11 +30,23 @@ namespace RedBadgeProject.WebMVC.Controllers
             var model = service.GetPetsByUserID();
             return View(model);
         }
+
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Pet/AdminPetList")]
+        public ActionResult AdminPetList()
+        {
+            var service = CreatePetService();
+            var model = service.GetPets();
+            return View(model);
+        }
+
+
         // Get: calls the view with the form to "build" a pet
+        //For Customer
         public ActionResult Create()
         {
-     
-            return View(); 
+
+            return View();
         }
 
         [HttpPost]
@@ -50,6 +62,38 @@ namespace RedBadgeProject.WebMVC.Controllers
             {
                 TempData["SaveResult"] = "Your pet's profile was created.";
                 return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your pet's profile could not be created.");
+
+            return View(model);
+        }
+
+
+        //Pet Create for Admin
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Pet/AdminCreate")]
+        public ActionResult AdminCreate()
+        {
+            ViewBag.PersonID = new SelectList(_dB.People, "PersonID", "FullName");
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [Route("Admin/Pet/AdminCreate")]
+        [ValidateAntiForgeryToken]
+
+        public ActionResult AdminCreate(PetCreate model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var service = CreatePetService();
+
+            if (service.AdminCreatePet(model))
+            {
+                TempData["SaveResult"] = "Your pet's profile was created.";
+                return RedirectToAction("AdminPetList", "Pet");
             }
 
             ModelState.AddModelError("", "Your pet's profile could not be created.");
@@ -101,12 +145,21 @@ namespace RedBadgeProject.WebMVC.Controllers
             if (service.UpdatePet(model))
             {
                 TempData["SaveResult"] = "Your pet's profile has been updated.";
-                return RedirectToAction("Index");
+
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("AdminPetList", "Pet");
+
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
 
             ModelState.AddModelError("", "Your pet's profile could not be updated.");
 
-                return View(model);
+            return View(model);
         }
 
         [ActionName("Delete")]
@@ -130,7 +183,15 @@ namespace RedBadgeProject.WebMVC.Controllers
 
             TempData["SaveResult"] = "Your profile was deleted";
 
-            return RedirectToAction("Index");
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("AdminPetList", "Pet");
+
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         //helper
@@ -138,7 +199,7 @@ namespace RedBadgeProject.WebMVC.Controllers
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new PetService(userId);
-            return service; 
+            return service;
         }
         private CustomerService CreateCustomerService()
         {

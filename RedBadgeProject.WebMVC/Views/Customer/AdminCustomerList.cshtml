@@ -66,7 +66,7 @@
                 @Html.DisplayFor(modelItem => item.ProfileModifiedDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.PersonID }) |
+                @Html.ActionLink("Edit", "AdminEdit", new { id = item.PersonID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.PersonID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.PersonID })
             </td>
@@ -74,3 +74,7 @@
     }
 
 </table>
+
+<p>
+    @Html.ActionLink("Back to Home", "AdminIndex", "Admin")
+</p>

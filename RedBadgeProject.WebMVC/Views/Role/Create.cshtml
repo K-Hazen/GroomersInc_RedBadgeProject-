@@ -10,14 +10,14 @@
 </style>
 @using (Html.BeginForm())
 {
-    <table style="width:40%; border:solid 4px red; background-color:skyblue; padding:10px;">
+    <table style="width:40%; border:solid 4px #687864; background-color:#8FC1E3; padding:10px;">
         <tr>
-            <td style="background:green; color:white; padding:10px;">Role Name:</td>
-            <td style="background:green; color:black; padding:10px;">
+            <td style="background: #31708E; color: white; padding: 10px;">Role Name:</td>
+            <td style="background:#31708E; color:black; padding:10px;">
                 @Html.EditorFor(m => m.Name)
             </td>
         </tr>
-        <tr><td style="height:20px;" colspan="2"></td></tr>
+        <tr><td style="height:25px;" colspan="2"></td></tr>
         <tr><td></td><td><input type="submit" value="Create Role" /></td></tr>
         <tr><td style="height:20px;" colspan="2"></td></tr>
     </table>

@@ -19,14 +19,14 @@ namespace Groomers.Models
 
 
         [Required]
-        [Display(Name = "Appointment Start Time")]
+        [Display(Name = "Start Time")]
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset StartTime { get; set; }
 
 
         [Required]
-        [Display(Name = "Appointment End Time")]
+        [Display(Name = "End Time")]
         [DataType(DataType.Time)]
         [DisplayFormat(DataFormatString = "{0:hh:mm}")]
         public DateTimeOffset EndTime { get; set; }
@@ -40,6 +40,7 @@ namespace Groomers.Models
         //[DisplayFormat(DataFormatString = "{0:C0}")]
         //public decimal Price { get; set; }
 
+        [Display(Name = "# Of Appointments")] 
         public int? NumberOfAppointmentsAvailable { get; set; }
     }
 
