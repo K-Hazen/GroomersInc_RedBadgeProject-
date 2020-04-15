@@ -1,22 +1,75 @@
 ﻿@model Groomers.Models.SearchDatePV
 
-@using (Html.BeginForm("SelectAppointmentDate", "Appointment", FormMethod.Post))
-{
-    <div class="form-group">
-      
-            @Html.LabelFor(model => model.SearchDate, htmlAttributes: new { @class = "control-label col-md-2" })
-      
+<style>
 
-        <div class="col-md-8 col-md-offset-2">
-            @Html.EditorFor(model => model.SearchDate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.SearchDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    #colOne {
+        border: 1px red solid;
+        width: 16em;
+        text-align: right;
+        padding-left: 4em;
+    }
+
+    /*#colTwo {
+        border: 1px blue solid;
+    }
+
+    #colThree {
+        border: 1px green solid;
+    }*/
+
+    #searchDate {
+        width: 1em;
+        /*border: solid 1px black;*/
+    }
+</style>
 
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Submit" class="btn btn-default" />
-        </div>
-    </div>
-}
+<table class="table">
+    @using (Html.BeginForm("SelectAppointmentDate", "Appointment", FormMethod.Post))
+    {
+        <thead>
+            <tr>
+                <th scope="col" id="searchDate">  @Html.LabelFor(model => model.SearchDate, htmlAttributes: new { @class = "control-label col-lg-8" })</th>
+                <th scope="col">
+                    @Html.EditorFor(model => model.SearchDate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SearchDate, "", new { @class = "text-danger" })
+                </th>
+                <th scope="col">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Submit" class="btn btn-default" />
+                        </div>
+                    </div>
+                </th>
+
+            </tr>
+        </thead>
+    }
+</table>
+
+    @*<div class="row">
+        @using (Html.BeginForm("SelectAppointmentDate", "Appointment", FormMethod.Post))
+        {
+            <div class="form-group">
+
+                <div class="col-md-8 col-md-2" id="colOne">
+                    @Html.LabelFor(model => model.SearchDate, htmlAttributes: new { @class = "control-label col-md-8" })
+                </div>
+
+
+                <div class="col-md-8 col-md-2" id="colTwo">
+
+                    @Html.EditorFor(model => model.SearchDate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.SearchDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-8 col-md-2" id="colThree">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Submit" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>*@

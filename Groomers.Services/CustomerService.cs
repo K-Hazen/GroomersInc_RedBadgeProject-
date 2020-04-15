@@ -1,6 +1,8 @@
 ﻿using Groomers.Data;
 using Groomers.Models;
 using Groonmers.Data;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +15,17 @@ namespace Groomers.Services
     {
         private readonly Guid _userID;
         private readonly ApplicationDbContext _context;
+        private ApplicationUser _appUser;
+
+        //create a constructor that passes in that user and assigns to the field
+        //in our controller, we'll use similar syntax to get the Guid, but were going to use the .Find method to return the Application User
 
         public CustomerService(Guid userID)
         {
             _context = new ApplicationDbContext();
             _userID = userID;
         }
+
 
         //CREATE    
 
@@ -94,7 +101,7 @@ namespace Groomers.Services
 
             return (customerList);
         }
-      
+
 
         public CustomerListItem GetCustomerByCurrentUserId()
         {
@@ -110,7 +117,7 @@ namespace Groomers.Services
                 petList.Add(new PetListItem
                 {
                     PetID = pet.PetID,
-                    Name = pet.Name
+                    Name = $"{pet.Name}, "
                 });
             }
 
@@ -120,6 +127,7 @@ namespace Groomers.Services
                 FullName = entity.FullName,
                 PhoneNumber = entity.PhoneNumber,
                 Email = entity.Email,
+                ProfileCreationDate = entity.ProfileCreationDate,
                 Pets = petList,
             };
 
@@ -169,10 +177,11 @@ namespace Groomers.Services
                     AppointmentDate = app.AppointmentDate,
                     StartTime = app.StartTime,
                     PetID = app.PetID,
-                }); 
+                    PetName = app.Pet.Name,
+                });
 
-                appListSorted = appList.OrderBy(x => x.AppointmentDate).ToList();
             }
+            appListSorted = appList.OrderByDescending(x => x.AppointmentDate).ToList();
 
             var model = new CustomerDetail
             {
@@ -224,11 +233,71 @@ namespace Groomers.Services
                     _context
                     .Customers
                     .Single(e => e.PersonID == id && e.UserID == _userID);
-                _context.Customers.Remove(entity);
+                //_context.Customers.Remove(entity);
+
+                foreach (var app in entity.Appointments)
+                {
+                    app.PetID = null;
+                    app.PersonID = null;
+                    app.IsAvailable = true;
+
+                }
+                _context.SaveChanges();
+
+                if (entity.Appointments.Count != 0)
+                {
+                    return false;
+                }
+                else
+                    _context.Customers.Remove(entity);
+
+
+                _context.SaveChanges();
+
+                //check context to see if Pets contains an entity for the pet we deleted's Id
+                foreach (var customer in _context.Customers)
+                {
+                    if (customer.PersonID == id)
+                    {
+                        return false;
+                    }
+
+                }
+
+              //  DeleteAppUser();
+
 
                 return _context.SaveChanges() == 1;
+
             }
         }
+
+        public bool DeleteAppUser()
+        {
+            // var user = _context.Users.Find(_userID.ToString());
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
+
+            var roles = userManager.GetRoles(_userID.ToString());
+
+            //if role is admin, don't let user delete themself
+
+            foreach (var role in roles)
+            {
+
+                if (role != "Admin")
+                {
+                   // _appUser = role; 
+                    var result = userManager.Delete(_appUser);
+
+                    if (!result.Succeeded) return false;
+                    return true;
+                }
+                return false;
+            }
+            return false;
+
+        }
+        //after you run the initial delete method in the controller then call in the 
 
     }
 }

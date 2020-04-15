@@ -71,7 +71,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
-      
+
         public ActionResult Details(int id)
         {
             var service = CreateCustomerService();
@@ -81,7 +81,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             return View(model);
         }
 
-      
+
         public ActionResult Edit(int id)
         {
             var service = CreateCustomerService();
@@ -100,10 +100,10 @@ namespace RedBadgeProject.WebMVC.Controllers
                     Email = detail.Email,
                 };
 
-            return View(model); 
+            return View(model);
         }
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
 
@@ -136,7 +136,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             }
 
             ModelState.AddModelError("", "Your profile could not be updated.");
-            return View(model); 
+            return View(model);
         }
 
         [ActionName("Delete")]
@@ -170,7 +170,7 @@ namespace RedBadgeProject.WebMVC.Controllers
                 return RedirectToAction("Index");
             }
         }
-            
+
 
         //helper method
         private CustomerService CreateCustomerService()

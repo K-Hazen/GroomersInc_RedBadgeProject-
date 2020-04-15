@@ -15,31 +15,98 @@
     </div>
 }
 
+<style>
+
+    .jumbotron{
+        background-color: #8FC1E3;
+    }
+    #BookingTable {
+        align-items: center;
+    }
+
+    .booking {
+        height: 10em;
+        padding-top: .5em;
+        margin-top: -1em;
+
+        text-align: center;
+        border-bottom-color: #687864;
+        border-bottom: 2px solid;
+        border-top-color: #687864;
+        border-top: 2px solid;
+    }
+
+    @@media (max-width: 997px)
+{
+    .booking
+    {
+      border-top: 0px solid !important;
+      border-bottom: 0px solid !important;
+    }
+}
+
+    .col-md-4 {
+        background-color: #31708E;
+        border-radius: 15px 15px 15px 15px;
+        color: #F7F9FB;
+
+    }
+
+    #column {
+        border-right: 8px solid #F7F9FB;
+    }
+
+    .row.display-flex {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 2em;
+    }
+
+        .row.display-flex > [class*='col-'] {
+            display: flex;
+            flex-direction: column;
+        }
+
+</style>
+
 <div class="jumbotron">
     <h1>Welcome @Html.DisplayFor(model => model.FirstName)! </h1>
     <p class="lead">Looking to book your favorite family member a day at the spa!?!? You are in the right place. Just input a date and hit the search button and off you go!</p>
-    @Html.Partial("SearchDate", new Groomers.Models.SearchDatePV())
     @*<p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
 </div>
 
-<div class="row">
-    <div class="col-md-4">
+<div class="booking">
+        <h3>Book An Appointment</h3>
+        <table class="table-responsive" id="BookingTable" align="center">
+            <thead>
+                <tr>
+                    <th scope="col">@Html.Partial("SearchDate", new Groomers.Models.SearchDatePV())</th>
+
+                </tr>
+            </thead>
+        </table>
+</div>
+
+<div class="row display-flex">
+    <div class="col-md-4" id="column">
         <h2>Add your Pet</h2>
         <p>
             We love our customers, but we love their dogs more! Please create a profile for your pet so we have all their important details.
         </p>
+        
         <p><a class="btn btn-default" href=@Url.Action("Create","Pet")>Add A Pet &raquo;</a></p>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" id="column">
         <h2>View Appointments</h2>
         <p>Need to check in on you appointments? No worries, we got you covered. Just click here to see what you have scheduled. </p>
+        
         <p><a class="btn btn-default" href=@Url.Action("Details", "Customer", new { id = Model.PersonID })>See Appointments &raquo;</a></p>
     </div>
     <div class="col-md-4">
         <h2>Edit/Update Profile</h2>
         <p>Make changes to your contact info/pet details etc. </p>
         <p><a class="btn btn-default" href=@Url.Action("Edit","Customer", new { id = Model.PersonID })>Update Customer &raquo;</a></p>
-        <br/> 
+        <br />
         <p><a class="btn btn-default" href=@Url.Action("Index","Pet", new { id = Model.PersonID })>Update Pet &raquo;</a></p>
     </div>
 </div>

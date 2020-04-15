@@ -7,6 +7,13 @@
 
 <h3>Profile Page</h3>
 
+<div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.PersonID }) |
+        @Html.ActionLink("Back to Home", "UserIndex", "Users")
+    </p>
+</div>
+
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success fade in" role="alert">
@@ -18,14 +25,57 @@
     </div>
 }
 
-<div>
+<style>
+
+    .Profile{
+        margin-left: 2em;
+        max-width: 35em;
+    }
+    dt {
+        margin-top: 10px;
+    }
+
+    dd {
+        padding-top: 10px;
+        
+    }
+
+    #personID {
+        margin-top: 8px;
+    }
+
+    h4 {
+        font-weight: bold;
+    }
+
+    #maxTable{
+        max-width: 30em;
+       
+    }
+    #tableDiv {
+        text-align: left;
+        margin-left: 4em;
+    }
+
+
+    .booking {
+        height: 10em;
+        padding-top: .5em;
+        margin-top: 0em;
+        margin-left: 5em;
+        text-align: left;
+    }
+
+</style>
+
+<div class="Profile">
     <hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.PersonID)
         </dt>
 
-        <dd>
+        <dd id="personID">
             @Html.DisplayFor(model => model.PersonID)
         </dd>
 
@@ -102,34 +152,66 @@
                 @p.Name
             }
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Appointments)
-        </dt>
         <dd>
-            @foreach (var p in Model.Appointments)
-            {
-                <ul>
-
-                    <li>
-                        @Html.DisplayNameFor(model => p.AppointmentDate)
-                        @Html.DisplayFor(model => p.AppointmentDate, new { htmlAttributes = new { @class = "form-control" } })
-                    </li>
-                    <li>
-                        @Html.DisplayNameFor(model => p.StartTime)
-                        @Html.DisplayFor(model => p.StartTime, new { htmlAttributes = new { @class = "form-control" } })
-                    </li>
-                    <li>
-                        @Html.DisplayNameFor(model => p.PetName)
-
-                        @Html.DisplayFor(model => p.PetName, new { htmlAttributes = new { @class = "form-control" } })
-                    </li>
-                </ul>
-            }
         </dd>
     </dl>
 </div>
 
-@Html.Partial("SearchDate", new Groomers.Models.SearchDatePV())
+    <div class="container" id="tableDiv">
+        <h4>Appointments</h4>
+        <table class="table table-hover table-responsive table-bordered" id="maxTable">
+            <thead>
+                <tr>
+                    <th class="tableColumn" scope="col">Date</th>
+                    <th class="tableColumn2" scope="col">Time</th>
+                    <th class="tableColumn3" scope="col">Pet</th>
+                </tr>
+            </thead>
+            @foreach (var p in Model.Appointments)
+            {
+                <tbody>
+                    <tr>
+                        <td> @Html.DisplayFor(model => p.AppointmentDate, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>  @Html.DisplayFor(model => p.StartTime, new { htmlAttributes = new { @class = "form-control" } })</td>
+                        <td>@Html.DisplayFor(model => p.PetName, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+
+
+    @*<ul>
+
+            <li>
+                @Html.DisplayNameFor(model => p.AppointmentDate)
+                @Html.DisplayFor(model => p.AppointmentDate, new { htmlAttributes = new { @class = "form-control" } })
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => p.StartTime)
+                @Html.DisplayFor(model => p.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+            </li>
+            <li>
+                @Html.DisplayNameFor(model => p.PetName)
+
+                @Html.DisplayFor(model => p.PetName, new { htmlAttributes = new { @class = "form-control" } })
+            </li>
+        </ul>*@
+
+
+@*@Html.Partial("SearchDate", new Groomers.Models.SearchDatePV())*@
+
+<div class="booking">
+    <h4>Book Another Appointment</h4>
+    <table class="table-responsive" id="BookingTable" align="left">
+        <thead>
+            <tr>
+                <th scope="col">@Html.Partial("SearchDate", new Groomers.Models.SearchDatePV())</th>
+
+            </tr>
+        </thead>
+    </table>
+</div>
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PersonID }) |

@@ -26,7 +26,8 @@ namespace Groonmers.Data
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-        }
+         
+    }
 
         public static ApplicationDbContext Create()
         {
@@ -38,7 +39,8 @@ namespace Groonmers.Data
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Employee> Employees { get; set; }
-
+        
+     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder

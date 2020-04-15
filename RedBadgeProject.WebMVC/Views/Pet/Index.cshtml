@@ -21,7 +21,7 @@
     </div>
 }
 
-<table class="table">
+<table class="table table-hover table-responsive">
     <tr>
         @*<th>
             @Html.DisplayNameFor(model => model.PetID)
@@ -72,9 +72,9 @@
                     @Html.DisplayFor(modelItem => item.PersonID)
                 </td>*@
             <td>
+                @Html.ActionLink("Profile", "Details", new { id = item.PetID }) |
                 @Html.ActionLink("Edit", "Edit", new { id = item.PetID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PetID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PetID })
+                @Html.ActionLink("Remove", "Delete", new { id = item.PetID })
             </td>
         </tr>
     }
