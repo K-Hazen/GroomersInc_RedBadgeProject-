@@ -48,7 +48,7 @@ namespace RedBadgeProject.WebMVC.Controllers
             context.Roles.Add(role);
             context.SaveChanges();
             TempData["SaveResult"] = "Your role was created.";
-            return RedirectToAction("AdminIndex", "Admin");
+            return RedirectToAction("Index", "Role");
         }
     }
 }
