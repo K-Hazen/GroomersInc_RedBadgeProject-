@@ -33,6 +33,7 @@ namespace Groomers.Models
         [DisplayFormat(DataFormatString = "{0:MM/yyyy}")]
         public DateTime Birthday { get; set; }
 
+        [Display(Name = "Owner")]
         public int PersonID { get; set; }
 
     }
