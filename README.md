@@ -1,7 +1,7 @@
 # Groomers Inc.
 ## Red Badge Project for Eleven Fifty
 
-This app is designed as a basic scheduling application for a dog grooming business.
+This app is designed as a basic scheduling application for a dog grooming business. The shop owner can create appointments for customers to book. 
 
 ## Table of Contents
 * [Introduction](#introduction)
