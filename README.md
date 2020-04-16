@@ -37,7 +37,11 @@ To run this application
       - Note - Bootstrap comes installed the MVC template but, at the time of writing this, it only ran version 3.4.1
       - Microsoft.Asp.Net.Identity.EntityFramework
       - Newtonsoft.Json (this allows you to display enum names)
-```
+ 5. Access
+      - To see Admin side of things log on with 
+            - Admin username: bossPerson        
+            - Password: Password1!
+      - To see User side just register a new user 
 
 ## Functions
 - For Admin Users
