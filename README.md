@@ -12,9 +12,9 @@ This app is designed as a basic scheduling application for a dog grooming busine
 
 
 ## Introduction
-This class project was designed to give us hands on experience building out a .NET MVC application, n-tier architecture, working with foriegn keys, and using github as version control. The idea for the project came after seeing my folks continually have to call their groomer to schedule an appointment. 
+This class project was designed to give us hands on experience building out a .NET MVC application, n-tier architecture, working with foriegn keys, and using github as version control. The idea for the project came after seeing my parents continually have to call their groomer to schedule an appointment. 
 
-The goal was to provide an app that had feature for both a customer and shop owner. For the customer the objective was to allow them to create a profile, add their pets, and schedule an appointment. On the shop owner side of things and Admin section was setup for them to manage user roles, customers, appointments, and employees. 
+The goal was to provide an app that had features for both a customer and shop owner. For the customer the objective was to allow them to create a profile, add their pets, and schedule an appointment. On the shop owner side of things and Admin section was setup for them to manage user roles, customers, appointments, and employees. 
 
 ## Technologies 
 Project is created with:
@@ -41,7 +41,8 @@ To run this application
       - To see Admin side of things log on with 
             - Admin username: bossPerson        
             - Password: Password1!
-      - To see User side just register a new user 
+      - To see User side just register a new user
+```
 
 ## Functions
 - For Admin Users
